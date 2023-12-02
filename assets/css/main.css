@@ -1,0 +1,36 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+body, body * {
+  font-family: var(--fml-primary);
+}
+
+*.a_click_effect {
+  transition: 0.1s;
+  transform: scale(1);
+}
+*.a_click_effect:active {
+  transition: 0.08s;
+  transform: scale(0.95);
+}
+
+:root {
+  --fml-primary: Relaway;
+  --fml-secondary: Oswald;
+}
+
+@font-face {
+  font-family: Oswald;
+  src: url(../fonts/Oswald-VariableFont_wght.ttf);
+}
+@font-face {
+  font-family: Relaway;
+  src: url(../fonts/Raleway-VariableFont_wght.ttf);
+}/*# sourceMappingURL=main.css.map */

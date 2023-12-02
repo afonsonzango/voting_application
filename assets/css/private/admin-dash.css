@@ -1,0 +1,90 @@
+body {
+  padding-top: 65px;
+}
+
+.main-section {
+  width: 100%;
+  height: 100vh;
+}
+.main-section .page-content {
+  padding: 0 50px;
+}
+.main-section .page-content h1 {
+  font-size: 22px;
+  font-weight: 800;
+}
+.main-navbar {
+  width: 100%;
+  height: 65px;
+  border-bottom: rgba(0, 0, 0, 0.1) solid 1px;
+  display: flex;
+  padding: 0 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.main-navbar .fk-logo {
+  width: -moz-max-content;
+  width: max-content;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.main-navbar .fk-logo ._fk-logo {
+  width: 35px;
+  height: 35px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 100%;
+}
+.main-navbar .fk-lik-list {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+.main-navbar .fk-lik-list > ul {
+  width: -moz-max-content;
+  width: max-content;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 30px;
+}
+.main-navbar .fk-lik-list > ul li {
+  list-style-type: none;
+}
+.main-navbar .fk-lik-list > ul li a {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  line-height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.main-navbar .fk-lik-list > ul li a svg {
+  width: 20px;
+  height: 20px;
+  margin-top: -1px;
+}
+.main-navbar .fk-lik-list > ul li a svg path {
+  fill: #000;
+}
+.main-navbar .fk-lik-list > ul li .dropdown-menu {
+  padding: 8px 0;
+  border-radius: 5px;
+}
+.main-navbar .fk-lik-list > ul li .dropdown-menu a {
+  padding: 10px 20px;
+}
+.main-navbar .fk-lik-list > ul li .dropdown-menu a:active {
+  background-color: #d1d1d1;
+}
+.main-navbar .fk-lik-list > ul li .dropdown-menu a svg {
+  width: 18px;
+  height: 18px;
+}
+.main-navbar .fk-lik-list > ul li .dropdown-menu a svg path {
+  fill: rgb(30, 30, 30);
+}/*# sourceMappingURL=admin-dash.css.map */

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RRPL - <%- title %></title>
+
+    <% if (bootstrap == true) { %>
+        <link rel="stylesheet" href="/dependences/bootstrap/bootstrap.min.css">    
+        <script src="/dependences/bootstrap/bootstrap.bundle.min.js" defer></script>
+    <% } %>
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/<%- css %>">
+    <script src="/js/<%- js %>" defer></script>
+</head>
+
+<body>
+    <%- body %>
+</body>
+
+</html>
