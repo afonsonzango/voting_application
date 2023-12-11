@@ -7,7 +7,7 @@ class dashRoutes {
             css: 'private/admin-dash.css',
             bootstrap: true,
             js: 'private/'
-        })
+        });
     }
 
     async arquiveKeys(req: Request, res: Response) {
@@ -16,7 +16,7 @@ class dashRoutes {
             css: 'private/admin-dash.css',
             bootstrap: true,
             js: 'private/'
-        })
+        });
     }
 }
 
