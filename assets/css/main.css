@@ -33,4 +33,114 @@ body, body * {
 @font-face {
   font-family: Relaway;
   src: url(../fonts/Raleway-VariableFont_wght.ttf);
+}
+.modal.key-gen-modal .modal-content {
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.modal.key-gen-modal .modal-content .modal-body {
+  padding: 30px;
+}
+.modal.key-gen-modal .modal-content h1 {
+  font-size: 18px;
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.9);
+}
+.modal.key-gen-modal .modal-content p {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.8);
+}
+.modal.key-gen-modal .modal-content p .keys-number {
+  background-color: rgb(216, 216, 255);
+  font-family: var(--fml-secondary);
+  font-size: 12px;
+  border-radius: 4px;
+  padding: 0px 5px;
+  letter-spacing: 1px;
+  border: 2px solid rgb(177, 177, 255);
+}
+.modal.key-gen-modal .modal-content form .input-copper-field {
+  display: flex;
+  width: 100%;
+  background-color: rgb(216, 216, 255);
+  border-radius: 4px;
+  border: 2px solid rgb(177, 177, 255);
+}
+.modal.key-gen-modal .modal-content form .input-copper-field input {
+  width: calc(100% - 140px);
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+  font-family: var(--fml-secondary);
+  font-size: 16px;
+  font-weight: 500;
+  color: rgb(0, 0, 0);
+  outline: none;
+  letter-spacing: 1px;
+  background-color: transparent;
+  height: 60px;
+}
+.modal.key-gen-modal .modal-content form .input-copper-field button {
+  border: none;
+  outline: none;
+  width: 70px;
+  height: 50px;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  background-color: transparent;
+}
+.modal.key-gen-modal .modal-content form .input-copper-field button.up:active {
+  transition: 0.08s;
+  transform: translateY(-4px);
+}
+.modal.key-gen-modal .modal-content form .input-copper-field button.down:active {
+  transition: 0.08s;
+  transform: translateY(4px);
+}
+.modal.key-gen-modal .modal-content form .input-copper-field button svg {
+  width: 24px;
+  height: 24px;
+  margin-top: -5px;
+}
+.modal.key-gen-modal .modal-content form .input-copper-field button svg path {
+  fill: rgba(0, 0, 0, 0.8);
+}
+.modal.key-gen-modal .modal-content button {
+  width: 100%;
+  height: 40px;
+  background-color: rgb(0, 0, 0);
+  font-size: 15px;
+  color: #fff;
+  font-weight: 600;
+  margin-top: 10px;
+  padding: 24px 10px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  border-radius: 4px;
+  gap: 4px;
+}
+.modal.key-gen-modal .modal-content button span {
+  font-family: var(--fml-secondary);
+  font-size: 13px;
+}
+
+#loader {
+  width: 18px;
+  height: 18px;
+  border-radius: 100%;
+  border: 2px solid #fff;
+  border-right-color: transparent;
+  animation: identifier 1s linear infinite;
+}
+@keyframes identifier {
+  to {
+    transform: rotate(360deg);
+  }
 }/*# sourceMappingURL=main.css.map */
