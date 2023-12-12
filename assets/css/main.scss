@@ -152,6 +152,10 @@ body{
             font-size: 13px;
         }
     }
+
+    button[type = button] {
+        background: red;
+    }
 }
 
 #loader{

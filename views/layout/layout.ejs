@@ -13,12 +13,21 @@
 
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/<%- css %>">
-    <script src="/js/<%- js %>" defer></script>
-    <script src="/dependences/socketIO/socketIO.js" defer></script>
 </head>
 
 <body>
     <%- body %>
+    
+    <% if (socketConnection == true) { %>
+        <script src="/dependences/socketIO/socketIO.js"></script>
+    <% } %>
+
+    <% if (adminJsFiles == true) { %>
+        <script src="/js/private/key-gen-func.js"></script>
+        <script src="/js/private/war-gen-func.js"></script>
+    <% } %>
+
+    <script src="/js/<%- js %>"></script>
 </body>
 
 </html>

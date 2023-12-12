@@ -6,7 +6,9 @@ class dashRoutes {
             title: 'Dashboard',
             css: 'private/admin-dash.css',
             bootstrap: true,
-            js: 'private/key-gen-func.js'
+            js: 'private/',
+            socketConnection: true,
+            adminJsFiles: true
         });
     }
 
@@ -15,7 +17,9 @@ class dashRoutes {
             title: 'Dashboard',
             css: 'private/admin-dash.css',
             bootstrap: true,
-            js: 'private/key-gen-func.js'
+            js: 'private/',
+            socketConnection: true,
+            adminJsFiles: true
         });
     }
 }

@@ -19,6 +19,8 @@ class generalRoutes {
                 css: "public/",
                 bootstrap: true,
                 js: 'public/',
+                socketConnection: false,
+                adminJsFiles: false
             });
         } catch (error) {
             res.status(500).send({
@@ -36,6 +38,8 @@ class generalRoutes {
                 css: "public/voting.css",
                 bootstrap: true,
                 js: 'public/',
+                socketConnection: false,
+                adminJsFiles: false
             });
         } catch (error) {
             res.status(500).send({
@@ -52,7 +56,9 @@ class generalRoutes {
                 title: 'Selecionar canditado',
                 css: 'public/select.css',
                 js: 'public/select-animation.js',
-                bootstrap: true
+                bootstrap: true,
+                socketConnection: false,
+                adminJsFiles: false
             });
         } catch (error) {
             res.status(500).send({

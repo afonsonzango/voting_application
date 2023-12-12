@@ -19,7 +19,9 @@ class authRoutes {
                 title: 'Login',
                 css: 'public/loginScreen.css',
                 bootstrap: true,
-                js: 'public/'
+                js: 'public/',
+                socketConnection: false,
+                adminJsFiles: false
             });
         } catch (error) {
             res.status(500).send({

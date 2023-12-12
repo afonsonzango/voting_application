@@ -130,6 +130,9 @@ body, body * {
   font-family: var(--fml-secondary);
   font-size: 13px;
 }
+.modal.key-gen-modal .modal-content button[type=button] {
+  background: red;
+}
 
 #loader {
   width: 18px;
