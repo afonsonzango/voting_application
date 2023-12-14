@@ -43,9 +43,15 @@ socket.on('erroGenNum', function(data){
 });
 
 socket.on('done', function(){
-    vactualTxt.style.display = 'block';
-    loader.style.display = 'none';
-    document.querySelector('#alertGenKey').innerHTML = ``;
-    document.querySelector('#actualValue').value = `0`;
-    document.querySelector('#dismis_btn').click();
+    window.location.pathname = '/dashboard/arquive-keys'
 });
+
+var keys_length = document.querySelectorAll('.key_length');
+
+if(keys_length){
+    for (let i = 0; i < keys_length.length; i++) {
+        const keylength = keys_length[i].textContent.split('').length;
+        keys_length[i].innerText = keylength;
+        keys_length[i].style.display = 'block';
+    }
+}

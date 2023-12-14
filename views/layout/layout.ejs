@@ -27,7 +27,7 @@
         <script src="/js/private/war-gen-func.js"></script>
     <% } %>
 
-    <script src="/js/<%- js %>"></script>
+    <% if (js != '') { %><script src="/js/<%- js %>"></script><% } %>
 </body>
 
 </html>

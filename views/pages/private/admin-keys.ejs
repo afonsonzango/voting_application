@@ -2,6 +2,39 @@
     <%- include("../../parts/navbar") %>
 
     <div class="page-content">
-        <h1 class="mt-4">Todas as chaves</h1>
+        <% if(ObjectOverKey.length == 0) { %>
+            <div class="alert alert-primary mt-4">
+                Não foram geradas chaves nenhumas no momento.
+            </div>
+        <% } else { %>
+            <h1 class="mt-4 mb-4">Todas as chaves</h1>
+
+            <div class="row lines-define">
+                <% Object.values(ObjectOverKey).forEach(item => { %>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="column">
+                                    <div class="s-title">Série</div>
+                                    <div class="title"><%= item._series.content %></div>
+                                </div>
+                                <div class="column">
+                                    <div class="s-title">Nº de chaves</div>
+                                    <div class="title d-font"><%= item.credentials.length %></div>
+                                </div>
+                                <div class="column">
+                                    <div class="s-title">Ações</div>
+                                    <div class="actions">
+                                        <a href="/actions/export-pdf-keys/<%= item._series.id %>" class="btn btn-primary">PDF</a>
+                                        <a class="btn btn-primary">Vêr</a>
+                                        <a class="btn btn-danger">Eliminar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } %>
     </div>
 </section>
