@@ -9,10 +9,11 @@ const dbConfig = {
 };
 
 // Nome do arquivo de saída
-const outputFileName = 'backup.sql';
+const various = Date.now();
+const outputFileName = `backup-${various}.sql`;
 
 // Comando para exportar o banco de dados usando mysqldump
-const command = `mysqldump -h localhost -P 3306 -u ${dbConfig.user} -p${dbConfig.password} ${dbConfig.database} > ${outputFileName}`;
+const command = `mysqldump -h localhost -P 3306 -u ${dbConfig.user} -p ${dbConfig.password} ${dbConfig.database} > ./exportations/${outputFileName}`;
 
 // Executa o comando no terminal
 exec(command, (error, stdout, stderr) => {
