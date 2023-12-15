@@ -16,7 +16,8 @@
                             <div class="card-body">
                                 <div class="column">
                                     <div class="s-title">Série</div>
-                                    <div class="title"><%= item._series.content %></div>
+                                    <div class="title mb-1"><%= item._series.content %></div>
+                                    <div class="s-title" style="color: red;"><% if(item._series.expo == 1) { %>PDF Já exportado<% } %></div>
                                 </div>
                                 <div class="column">
                                     <div class="s-title">Nº de chaves</div>
@@ -27,7 +28,7 @@
                                     <div class="actions">
                                         <a href="/actions/export-pdf-keys/<%= item._series.id %>" class="btn btn-primary">PDF</a>
                                         <a class="btn btn-primary">Vêr</a>
-                                        <a class="btn btn-danger">Eliminar</a>
+                                        <a class="btn btn-danger" href="/actions/delete-key/<%= item._series.id %>">Eliminar</a>
                                     </div>
                                 </div>
                             </div>

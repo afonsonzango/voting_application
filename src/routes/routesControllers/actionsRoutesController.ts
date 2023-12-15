@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import fs from "fs";
 import PDFDocument from "pdfkit";
 import connection from "../../dataCenter";
-import { WriteStream } from "fs";
 
 class authRoutes {
     async exportPdfKeys(req: Request, res: Response) {
@@ -10,7 +9,9 @@ class authRoutes {
         try {
             const [serie]: any = await connection.promise().query('SELECT * FROM series WHERE id = ?', [req.params.series]);
             const [credentials]: any = await connection.promise().query('SELECT * FROM credential WHERE series_id = ?', [serie[0].id]);
-
+            
+            await connection.promise().query(`UPDATE series SET expo = ? WHERE id = ?`, [1, serie[0].id]);
+            
             const file_path = `${credentials.length}_ID_de_serie_${serie[0].content}.pdf`
 
             // Criação do documento PDF
@@ -32,35 +33,34 @@ class authRoutes {
 
             console.log('PDF gerado com sucesso.');
 
-            // Envie o PDF como resposta para o navegador
-            res.download(`./${file_path}`, (error) => {
-                if (error) {
-                    console.error('Erro ao enviar o PDF como resposta:', error);
-                } else {
-                    console.log('PDF enviado com sucesso como resposta.');
-                    // Remova o arquivo após o envio
-                    fs.unlinkSync(`./${file_path}`);
-                }
-            });
-
-            console.log('PDF gerado com sucesso.');
-
-            // Envie o PDF como resposta para o navegador
-            setTimeout(() => {
-                res.download(`./${file_path}`, (error) => {
+            setTimeout(async () => {
+                await res.download(`./${file_path}`, (error) => {
                     if (error) {
                         console.error('Erro ao enviar o PDF como resposta:', error);
                     } else {
-                        console.log('PDF enviado com sucesso como resposta.');
-                        // Remova o arquivo após o envio
                         fs.unlinkSync(`./${file_path}`);
+                        console.log('PDF enviado com sucesso como resposta.');    
                     }
                 });
-            }, 2000);
+            }, 300);
         } catch (error) {
             console.error('Erro ao gerar o PDF:', error);
         }
 
+    }
+
+    async removeKey(req: Request, res: Response) {
+        const key_id = Number(req.params.key_id)
+
+        try{
+            const [chave]:any = await connection.promise().query(`SELECT * FROM series WHERE id = ?`, [key_id]);
+            await connection.promise().query(`DELETE FROM credential WHERE series_id = ?`, [chave[0].id]);
+            await connection.promise().query(`DELETE FROM series WHERE id = ?`, [key_id]);
+
+            res.redirect('/dashboard/arquive-keys');
+        } catch (erro) {
+            console.log(erro);
+        }
     }
 }
 

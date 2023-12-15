@@ -18,12 +18,24 @@ class dashRoutes {
         try {
             const getAllData = () => {
                 return new Promise((resolve, reject) => {
-                    let rowObject :any = {};
+                    let rowObject: any = {};
 
                     connection.query(`SELECT * FROM series ORDER BY id DESC`, function (error: any, series: any) {
                         if (error) {
                             reject(error);
                             return;
+                        }
+
+                        if (series.length == 0) {
+                            res.status(200).render('pages/private/admin-keys', {
+                                title: 'Dashboard',
+                                css: 'private/admin-dash.css',
+                                bootstrap: true,
+                                js: 'private/',
+                                socketConnection: true,
+                                adminJsFiles: true,
+                                ObjectOverKey: []
+                            });
                         }
 
                         // Contador para rastrear consultas concluídas
@@ -61,7 +73,7 @@ class dashRoutes {
                     socketConnection: true,
                     adminJsFiles: true,
                     ObjectOverKey: result
-                });    
+                });
             }).catch((error) => {
                 console.error(error);
             });
