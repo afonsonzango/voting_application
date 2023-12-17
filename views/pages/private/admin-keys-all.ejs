@@ -1,0 +1,36 @@
+<section class="main-section">
+
+    <%- include('../../parts/navbar') %>
+
+    <div class="page-content mt-4">
+        <h1>Todas as credenciais</h1>
+        
+        <h2 class="func">Série: <%- credentialsList.series[0].content %></h2>
+
+        <div class="details mb-4">
+            <div class="d-item">Total de chaves: <b class="fml-sec"><%- credentialsList.credentials.credentials_all.length %></b></div>
+            <div class="d-item">Chaves activas: <b class="fml-sec"><%- credentialsList.credentials.credentials_usable.length %></b></div>
+            <div class="d-item">Chaves inativas: <b class="fml-sec"><%- credentialsList.credentials.credentials_unusable.length %></b></div>
+            <div class="d-item">
+                <a href="/actions/export-pdf-keys/<%- credentialsList.series[0].id %>" class="btn btn-primary">PDF</a>
+            </div>
+        </div>
+
+        <div class="row cred-lsit">
+            <% credentialsList.credentials.credentials_all.forEach((element) => { %>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <%- credentialsList.series[0].content %>-<b class="fml-sec" style="font-size: 15px; transform: translateY(-1px);"><%- element.content %></b>
+                            <% if(element.status == 0){ %>
+                                <b style="font-size: 13px; color: green; margin-left: 20px;">Activa</b>
+                            <% } else { %>
+                                <b style="font-size: 13px; color: red; margin-left: 20px;">Inativa</b>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            <%  }) %>
+        </div>
+    </div>
+</section>

@@ -14,8 +14,48 @@ body {
             }
 
             h1{
-                font-size: 22px;
+                font-size: 24px;
                 font-weight: 800;
+            }
+
+            h2{
+                font-size: 20px;
+                font-weight: 800;
+                
+                &.func{
+                    padding: 10px;
+                    border-radius: 5px;
+                    background-color: rgb(0, 0, 0,.05);
+                    border: 1px solid rgb(0, 0, 0,.1);
+                    width: max-content;    
+                }
+            }
+
+            .details{
+                padding: 10px;
+                border-radius: 5px;
+                background-color: rgb(0, 0, 0,.05);
+                border: 1px solid rgb(0, 0, 0,.1);
+                display: flex;
+                
+                .d-item{
+                    width: max-content;
+                    border-right: 1px solid rgb(0, 0, 0,.1);
+                    padding: 0 10px;
+                    font-size: 15px;
+                    font-weight: 500;
+                    
+                    &.last{ 
+                        border-right: 0px !important;
+                    }
+
+                    a{
+                        padding: 3px 10px;
+                        font-size: 12px;
+                        font-weight: 600;
+                        box-shadow: none;
+                    }
+                }      
             }
 
             .row{
@@ -160,6 +200,76 @@ body {
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+}
+
+.cred-lsit{
+    .col-sm-6{
+        width: calc(100% / 4) !important;
+
+        .card{
+            padding: 4px;
+            border: 1px solid rgb(0, 0, 0,.1);
+            border-radius: 4px;
+
+            .card-body{ 
+                display: flex;
+                gap: 0 !important;
+                font-size: 15px;
+                color: rgb(0, 0, 0,.9);
+                font-weight: 500;
+            }
+        }
+    }
+}
+
+.modal.warier-gen-modal{
+    .modal-body{
+        .warier-gen-form{
+            ._image{
+                width: 100%;
+                justify-content: center;
+                display: flex;
+
+                .img-copper{
+                    width: 160px;
+                    height: 200px;
+                    background-image: linear-gradient(120deg, rgb(0,0,0,.14), rgb(0,0,0,.05), rgb(0,0,0,.2));
+                    border-radius: 5px;
+                    border: 2px solid #fff;
+                    outline: 2px solid rgb(62, 168, 255);
+                    cursor: pointer;
+                }
+            }
+
+            .center-input{
+                display: flex;
+                justify-content: center;
+                margin-top: 10px;
+
+                .txt-warier-name{
+                    width: calc(100% - 50px);
+                    padding: 10px 8px;
+                    border: 1px solid rgb(0, 0, 0,.1);
+                    border-radius: 4px;
+                    font-size: 15px;
+                    font-weight: 500;
+                    gap: 10px;
+                }
+
+                input[type = submit]{
+                    width: calc(100% - 50px);
+                    background-color: #000;
+                    color: #fff;
+                    border: none;
+                    outline: none;
+                    font-size: 15px;
+                    font-weight: 500;
+                    padding: 10px 0;
+                    border-radius: 4px;
                 }
             }
         }

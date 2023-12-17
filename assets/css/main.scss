@@ -38,6 +38,11 @@ body{
     src: url(../fonts/Raleway-VariableFont_wght.ttf);
 }
 
+.fml-sec{
+    font-family: var(--fml-secondary) !important;
+    font-size: 13px;
+}
+
 .modal.key-gen-modal .modal-content{
     border-radius: 10px;
     border: 1px solid rgb(0, 0, 0,.1);

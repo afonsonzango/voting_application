@@ -81,6 +81,48 @@ class dashRoutes {
             console.log(error);
         }
     }
+
+    async arquiveKeysAll(req: Request, res: Response) {
+        const keys_id = req.params.keys_id;
+
+        try {
+            const [series]: any = await connection.promise().query(`SELECT * FROM series WHERE id = ?`, [keys_id]);
+
+            if (series.length == 0) {
+                res.status(400).send({
+                    erro: true,
+                    mensagem: 'Serie inexistente'  
+                });
+            } else {
+                const [credentials_all]: any = await connection.promise().query(`SELECT * FROM credential WHERE series_id = ?`, [keys_id]);
+                const [credentials_usable]: any = await connection.promise().query(`SELECT * FROM credential WHERE series_id = ? AND status = ?`, [keys_id, 0]);
+                const [credentials_unusable]: any = await connection.promise().query(`SELECT * FROM credential WHERE series_id = ? AND status = ?`, [keys_id, 1]);
+
+                let response = {
+                    series,
+                    credentials: {
+                        credentials_all, 
+                        credentials_usable,
+                        credentials_unusable,
+                    }
+                }
+
+                res.status(200).render('pages/private/admin-keys-all', {
+                    title: `Série ${series[0].content}`,
+                    css: "private/admin-dash.css",
+                    bootstrap: true,
+                    js: 'private/',
+                    socketConnection: true,
+                    adminJsFiles: true,
+                    credentialsList: response
+                });
+
+                console.log(response);
+            }
+        } catch (error) {
+            res.status(500).send('Algo correu mal ao buscar os dados.');
+        }
+    }
 }
 
 export default dashRoutes; 

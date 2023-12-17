@@ -14,8 +14,44 @@ body {
   }
 }
 .main-section .page-content h1 {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 800;
+}
+.main-section .page-content h2 {
+  font-size: 20px;
+  font-weight: 800;
+}
+.main-section .page-content h2.func {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: -moz-max-content;
+  width: max-content;
+}
+.main-section .page-content .details {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+}
+.main-section .page-content .details .d-item {
+  width: -moz-max-content;
+  width: max-content;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0 10px;
+  font-size: 15px;
+  font-weight: 500;
+}
+.main-section .page-content .details .d-item.last {
+  border-right: 0px !important;
+}
+.main-section .page-content .details .d-item a {
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: none;
 }
 .main-section .page-content .row .col-sm-6 {
   width: 33.3333333333%;
@@ -141,4 +177,60 @@ body {
 }
 .main-navbar .fk-lik-list > ul li .dropdown-menu a svg path {
   fill: rgb(30, 30, 30);
+}
+
+.cred-lsit .col-sm-6 {
+  width: 25% !important;
+}
+.cred-lsit .col-sm-6 .card {
+  padding: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+.cred-lsit .col-sm-6 .card .card-body {
+  display: flex;
+  gap: 0 !important;
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.9);
+  font-weight: 500;
+}
+
+.modal.warier-gen-modal .modal-body .warier-gen-form ._image {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+}
+.modal.warier-gen-modal .modal-body .warier-gen-form ._image .img-copper {
+  width: 160px;
+  height: 200px;
+  background-image: linear-gradient(120deg, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.2));
+  border-radius: 5px;
+  border: 2px solid #fff;
+  outline: 2px solid rgb(62, 168, 255);
+  cursor: pointer;
+}
+.modal.warier-gen-modal .modal-body .warier-gen-form .center-input {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.modal.warier-gen-modal .modal-body .warier-gen-form .center-input .txt-warier-name {
+  width: calc(100% - 50px);
+  padding: 10px 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 500;
+  gap: 10px;
+}
+.modal.warier-gen-modal .modal-body .warier-gen-form .center-input input[type=submit] {
+  width: calc(100% - 50px);
+  background-color: #000;
+  color: #fff;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px 0;
+  border-radius: 4px;
 }/*# sourceMappingURL=admin-dash.css.map */
