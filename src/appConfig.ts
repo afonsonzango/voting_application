@@ -8,7 +8,11 @@ import http from "http";
 
 const app = express();
 const server = http.createServer(app);
-require('./routes/socketRouter')(server);
+require('./routes/socketRouter')(server, {
+    cors: {
+        origin: '*'
+    },
+});
 
 dotenv.config();
 

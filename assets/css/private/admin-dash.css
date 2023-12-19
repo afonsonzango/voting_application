@@ -57,6 +57,16 @@ body {
   width: 33.3333333333%;
   margin-bottom: 20px;
 }
+@media (max-width: 1050px) {
+  .main-section .page-content .row .col-sm-6 {
+    width: 50%;
+  }
+}
+@media (max-width: 950px) {
+  .main-section .page-content .row .col-sm-6 {
+    width: 100%;
+  }
+}
 .main-section .page-content .row .col-sm-6 .card {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 0;
@@ -208,6 +218,13 @@ body {
   border: 2px solid #fff;
   outline: 2px solid rgb(62, 168, 255);
   cursor: pointer;
+  overflow: hidden;
+}
+.modal.warier-gen-modal .modal-body .warier-gen-form ._image .img-copper img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .modal.warier-gen-modal .modal-body .warier-gen-form .center-input {
   display: flex;

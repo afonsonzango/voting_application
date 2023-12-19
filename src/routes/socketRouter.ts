@@ -3,9 +3,13 @@ import { Server as SocketIOServer, Socket } from 'socket.io';
 import { generateIds } from '../utilities/keyGenerator';
 import { seriesGenerator } from '../utilities/seriesGenerator';
 import connection from '../dataCenter';
+import { Request, Response } from 'express';
+import fs from "fs";
 
 module.exports = function socketConnection(server: Server) {
-    const io: SocketIOServer = require('socket.io')(server);
+    const io: SocketIOServer = require('socket.io')(server, {
+        maxHttpBufferSize: 2 * 1024 * 1024
+    });
 
     io.on('connection', function (socket: Socket) {
         socket.on('gen_key_limit', function (data) {
@@ -49,6 +53,31 @@ module.exports = function socketConnection(server: Server) {
             } else {
                 socket.emit('erroGenNum', 'Valor de gerência é inválido!');
             }
+        });
+
+        socket.on('setUpWarier', async function (imagem, nome, res: Response) {
+            const filename_path = `assets/midea/waries/warier-${Date.now()}.jpeg`;
+            
+            fs.writeFile(filename_path, imagem, function(error) {
+                if (error) {
+                    console.error('Error writing file:', error);
+                } else {
+                    console.log('File saved successfully:', imagem);
+                }
+            });
+
+            
+            try {
+                await connection.promise().query('INSERT INTO wariers SET nome = ?, img = ?', [nome, filename_path]);
+                socket.emit('warierInserted');
+            } catch (error) {
+                res.status(500).send({
+                    error: true,
+                    menagem: 'Algo deu errado ao salvar informações',
+                    error_desc: error
+                })
+            }
+
         });
     });
 }
