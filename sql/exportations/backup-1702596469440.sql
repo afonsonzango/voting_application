@@ -1,4 +1,4 @@
--- MariaDB dump 10.19  Distrib 10.11.4-MariaDB, for debian-linux-gnu (x86_64)
+-- 3MariaDB dump 10.19  Distrib 10.11.4-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: voting_appplication
 -- ------------------------------------------------------
