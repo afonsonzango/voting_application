@@ -55,8 +55,9 @@ module.exports = function socketConnection(server: Server) {
             }
         });
 
-        socket.on('setUpWarier', async function (imagem, nome, res: Response) {
+        socket.on('setUpWarier', async function (imagem, nome) {
             const filename_path = `assets/midea/waries/warier-${Date.now()}.jpeg`;
+            const _filename_path = `/midea/waries/warier-${Date.now()}.jpeg`;
             
             fs.writeFile(filename_path, imagem, function(error) {
                 if (error) {
@@ -66,18 +67,31 @@ module.exports = function socketConnection(server: Server) {
                 }
             });
 
-            
             try {
-                await connection.promise().query('INSERT INTO wariers SET nome = ?, img = ?', [nome, filename_path]);
+                await connection.promise().query('INSERT INTO wariers SET nome = ?, img = ?', [nome, _filename_path]);
                 socket.emit('warierInserted');
             } catch (error) {
-                res.status(500).send({
-                    error: true,
-                    menagem: 'Algo deu errado ao salvar informações',
-                    error_desc: error
-                })
+                console.log(error);
             }
+        });
 
+        socket.on('deleteWarier', async function(data, res: Response) {
+            const myDelQuery = `
+                DELETE FROM wariers WHERE id = ${data}
+            `
+
+            try {
+                const [dlt_query]:any = await connection.promise().query(myDelQuery)
+                
+                const results = {
+                    dlt_query,
+                    data
+                }
+
+                socket.emit('userDeleted', results);
+            } catch (error) {
+                console.log(error);
+            }
         });
     });
 }

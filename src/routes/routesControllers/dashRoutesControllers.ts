@@ -8,7 +8,7 @@ class dashRoutes {
             title: 'Dashboard',
             css: 'private/admin-dash.css',
             bootstrap: true,
-            js: 'private/',
+            js: '',
             socketConnection: true,
             adminJsFiles: true
         });
@@ -31,7 +31,7 @@ class dashRoutes {
                                 title: 'Dashboard',
                                 css: 'private/admin-dash.css',
                                 bootstrap: true,
-                                js: 'private/',
+                                js: '',
                                 socketConnection: true,
                                 adminJsFiles: true,
                                 ObjectOverKey: []
@@ -69,7 +69,7 @@ class dashRoutes {
                     title: 'Dashboard',
                     css: 'private/admin-dash.css',
                     bootstrap: true,
-                    js: 'private/',
+                    js: '',
                     socketConnection: true,
                     adminJsFiles: true,
                     ObjectOverKey: result
@@ -111,7 +111,7 @@ class dashRoutes {
                     title: `Série ${series[0].content}`,
                     css: "private/admin-dash.css",
                     bootstrap: true,
-                    js: 'private/',
+                    js: '',
                     socketConnection: true,
                     adminJsFiles: true,
                     credentialsList: response
@@ -121,6 +121,29 @@ class dashRoutes {
             }
         } catch (error) {
             res.status(500).send('Algo correu mal ao buscar os dados.');
+        }
+    }
+
+    async arquiveWariesAll(req: Request, res: Response) {
+
+        try {
+            const [waries]:any = await connection.promise().query(`SELECT * FROM wariers ORDER BY id DESC`);
+
+            res.status(200).render('pages/private/admin-waries', {
+                title: 'Dashboard',
+                css: 'private/admin-dash.css',
+                bootstrap: true,
+                js: '',
+                socketConnection: true,
+                adminJsFiles: true,
+                waries: waries 
+            });   
+        } catch (error) {
+            res.json({
+                error: true,
+                mensagem: 'Erro interno da aplicação.',
+                _error: error
+            })
         }
     }
 }

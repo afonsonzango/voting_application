@@ -28,7 +28,7 @@ warier_gen_form.addEventListener('submit', function (e) {
 
     socket.emit('setUpWarier', warierComponents.image[0], warierComponents.name);
     warier_gen_form.style.display = 'none'
-    
+
     alertValueInserting.innerHTML = `
         <div class="alert alert-primary">
             Inserindo gladiador <b>${document.querySelector('#warierName').value}</b>
@@ -46,4 +46,41 @@ socket.on('warierInserted', function () {
     document.getElementById('imgWarier').value = null
     document.getElementById('warierName').value = ''
     document.getElementById('imageCopper').src = ''
+
+    document.querySelector('#refreshing').innerHTML = `
+        <a href="/dashboard/arquive-waries" class="btn btn-primary">Porfavor, reinicie a página</a>
+    `
 });
+
+function deleteWarier(value) {
+    socket.emit('deleteWarier', value.value);
+}
+
+socket.on('userDeleted', function (data) {
+    console.log(data);
+    removeDOMItem(data.data);
+});
+
+function removeDOMItem(id) {
+    var allElementsRow = document.querySelectorAll('.warier-rep-item');
+
+    allElementsRow.forEach(element => {
+        const atb_t = element.getAttribute('data-id');
+
+        if (atb_t == id) {
+            element.remove();
+
+            var verifyLength = document.querySelectorAll('.warier-rep-item');
+
+            if (verifyLength.length == 0) {
+                document.querySelector('.page-content').innerHTML = `
+                    <div id="refreshing"></div>
+                    
+                    <div class="alert alert-primary">
+                        Nenhum galdiador registrado.
+                    </div>
+                `
+            }
+        }
+    });
+}
