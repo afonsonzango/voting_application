@@ -1,23 +1,24 @@
-*, 
+*,
 *::after,
 *::before {
     box-sizing: border-box;
 }
 
-body{
+body {
     padding: 0;
     margin: 0;
 
-    &, *{
+    &,
+    * {
         font-family: var(--fml-primary);
     }
 }
 
-*.a_click_effect{
+*.a_click_effect {
     transition: .1s;
     transform: scale(1.0);
-    
-    &:active{
+
+    &:active {
         transition: .08s;
         transform: scale(0.95);
     }
@@ -38,31 +39,31 @@ body{
     src: url(../fonts/Raleway-VariableFont_wght.ttf);
 }
 
-.fml-sec{
+.fml-sec {
     font-family: var(--fml-secondary) !important;
     font-size: 13px;
 }
 
-.modal.key-gen-modal .modal-content{
+.modal.key-gen-modal .modal-content {
     border-radius: 10px;
-    border: 1px solid rgb(0, 0, 0,.1);
+    border: 1px solid rgb(0, 0, 0, .1);
 
-    .modal-body{
+    .modal-body {
         padding: 30px;
     }
 
-    h1{
+    h1 {
         font-size: 18px;
         font-weight: 800;
-        color: rgb(0, 0, 0,.9);
+        color: rgb(0, 0, 0, .9);
     }
 
-    p{
+    p {
         font-size: 14px;
         font-weight: 500;
-        color: rgb(0, 0, 0,.8);
+        color: rgb(0, 0, 0, .8);
 
-        .keys-number{
+        .keys-number {
             background-color: rgb(216, 216, 255);
             font-family: var(--fml-secondary);
             font-size: 12px;
@@ -73,15 +74,15 @@ body{
         }
     }
 
-    form{
-        .input-copper-field{
+    form {
+        .input-copper-field {
             display: flex;
             width: 100%;
             background-color: rgb(216, 216, 255);
             border-radius: 4px;
             border: 2px solid rgb(177, 177, 255);
 
-            input{
+            input {
                 width: calc(100% - 70px * 2);
                 border: none;
                 border-radius: 4px;
@@ -96,7 +97,7 @@ body{
                 height: 60px;
             }
 
-            button{
+            button {
                 border: none;
                 outline: none;
                 width: 70px;
@@ -107,28 +108,28 @@ body{
                 align-items: center;
                 transition: .5s;
                 background-color: transparent;
-                
-                &.up{
-                    &:active{
+
+                &.up {
+                    &:active {
                         transition: .08s;
                         transform: translateY(-4px);
                     }
                 }
-                
-                &.down{
-                    &:active{
+
+                &.down {
+                    &:active {
                         transition: .08s;
                         transform: translateY(4px);
                     }
                 }
 
-                svg{
+                svg {
                     width: 24px;
                     height: 24px;
                     margin-top: -5px;
 
-                    path{
-                        fill: rgb(0, 0, 0,.8);
+                    path {
+                        fill: rgb(0, 0, 0, .8);
                     }
                 }
             }
@@ -152,18 +153,18 @@ body{
         border-radius: 4px;
         gap: 4px;
 
-        span{
+        span {
             font-family: var(--fml-secondary);
             font-size: 13px;
         }
     }
 
-    button[type = button] {
+    button[type=button] {
         background: red;
     }
 }
 
-#loader{
+#loader {
     width: 18px;
     height: 18px;
     border-radius: 100%;
@@ -174,6 +175,109 @@ body{
     @keyframes identifier {
         to {
             transform: rotate(360deg);
+        }
+    }
+}
+
+.modal.warier_exampleModal {
+    .modal-dialog {
+        .modal-content {
+            border-radius: 0;
+
+            .modal-body {
+                .warier-select {
+                    position: relative;
+
+                    input.ws-input {
+                        width: 100%;
+                        height: 45px;
+                        border-radius: 5px;
+                        border: 1px solid rgb(0, 0, 0, .1);
+                        padding: 0 14px;
+                        padding-right: 55px;
+                    }
+
+                    .icon{
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        width: 45px;
+                        height: 45px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        svg{
+                            width: 24px;
+                            height: 24px;
+
+                            path{ 
+                                fill: rgb(0, 0, 0,.7);
+                            }
+                        }
+                    }
+
+                    #palet_el{
+                        width: 100%;
+                        border: 1px solid rgb(75, 102, 255);
+                        position: absolute;
+                        margin-top: 45px;
+                        overflow: hidden;
+                        top: 0;
+                        left: 0;
+                        border-radius: 5px;
+                        background-color: #fff;
+
+                        .warier{
+                            display: flex;
+                            gap: 10px;
+                            padding: 0 15px;
+                            align-items: center;
+                            height: 55px;
+                            cursor: pointer;
+                            
+                            &:hover{
+                                background-color: rgb(0, 0, 0,.05);
+                            }
+
+                            &.no-warier{
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-size: 15px;
+                                font-weight: 600;
+                                color: rgb(0, 0, 0,.6);
+
+                                svg{
+                                    width: 23px;
+                                    height: 23px;
+                                }
+                            }
+
+                            .photo{
+                                width: 40px;
+                                height: 40px;
+                                border-radius: 100%;
+                                overflow: hidden;
+                                background-image: linear-gradient(120deg, rgb(0,0,0,.09), rgb(0,0,0,.14), rgb(0,0,0,.08));
+
+                                img{
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                }
+                            }
+
+                            .name{
+                                width: calc(100% - 40px);
+                                font-size: 15px;
+                                font-weight: 500;
+                                color: rgb(0, 0, 0,.8);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

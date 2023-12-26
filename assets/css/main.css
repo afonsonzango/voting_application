@@ -8,7 +8,8 @@ body {
   padding: 0;
   margin: 0;
 }
-body, body * {
+body,
+body * {
   font-family: var(--fml-primary);
 }
 
@@ -151,4 +152,89 @@ body, body * {
   to {
     transform: rotate(360deg);
   }
+}
+
+.modal.warier_exampleModal .modal-dialog .modal-content {
+  border-radius: 0;
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .warier-select {
+  position: relative;
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .warier-select input.ws-input {
+  width: 100%;
+  height: 45px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0 14px;
+  padding-right: 55px;
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .warier-select .icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .warier-select .icon svg {
+  width: 24px;
+  height: 24px;
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .warier-select .icon svg path {
+  fill: rgba(0, 0, 0, 0.7);
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .warier-select #palet_el {
+  width: 100%;
+  border: 1px solid rgb(75, 102, 255);
+  position: absolute;
+  margin-top: 45px;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  border-radius: 5px;
+  background-color: #fff;
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .warier-select #palet_el .warier {
+  display: flex;
+  gap: 10px;
+  padding: 0 15px;
+  align-items: center;
+  height: 55px;
+  cursor: pointer;
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .warier-select #palet_el .warier:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .warier-select #palet_el .warier.no-warier {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.6);
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .warier-select #palet_el .warier.no-warier svg {
+  width: 23px;
+  height: 23px;
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .warier-select #palet_el .warier .photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  overflow: hidden;
+  background-image: linear-gradient(120deg, rgba(0, 0, 0, 0.09), rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.08));
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .warier-select #palet_el .warier .photo img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .warier-select #palet_el .warier .name {
+  width: calc(100% - 40px);
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.8);
 }/*# sourceMappingURL=main.css.map */

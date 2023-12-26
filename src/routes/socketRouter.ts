@@ -93,5 +93,13 @@ module.exports = function socketConnection(server: Server) {
                 console.log(error);
             }
         });
+
+        socket.on('getWariersBySearch', function(data) {
+            connection.query('SELECT * FROM wariers WHERE nome LIKE ? LIMIT 6', ['%'+data+'%'], function(error, results){
+                if(error) throw error;
+                console.log(results);
+                socket.emit('setResults', results);
+            });
+        }); 
     });
 }
