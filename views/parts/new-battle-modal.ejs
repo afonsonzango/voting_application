@@ -1,7 +1,9 @@
 <div class="modal fade warier_exampleModal" id="warier_exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-body">
+            <form class="modal-body" action="" method="POST" id="formSubmitElement">
+                <div id="absolute-loader"></div>
+                
                 <div class="warier-select">
                     <input type="text" class="ws-input" id="inputSeachItem">
                     <div class="icon">
@@ -12,7 +14,66 @@
 
                     <div id="palet_el"></div>
                 </div>
-            </div>
+
+                <div class="war-setup">
+                    <div class="w-element left-element">
+                        <input type="hidden" class="warierSetUp" value="">
+                        <div class="profile-pic">
+                            <img src="/midea/waries/default.png" alt="">
+                        </div>
+                        <div class="profile-name">
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="gap-el">VS</div>
+                    <div class="w-element right-element">
+                        <input type="hidden" class="warierSetUp" value="">
+                        <div class="profile-pic">
+                            <img src="/midea/waries/default.png" alt="">
+                        </div>
+                        <div class="profile-name">
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="keySeries-select mt-4" id="selectAbleSection" style="display: none;">
+                    <select class="form-select mt-2" aria-label="Disabled select example" required>
+                        <option value="" disabled selected>Selecione a chave</option>
+                        <% series.forEach(function(element){ %>    
+                            <option value="<%- element.id %>"><%- element.content %></option>
+                        <% }) %>
+                    </select>
+
+                    <select class="form-select mt-2" aria-label="Disabled select example" required>
+                        <option value="" disabled selected>Selecione a chave</option>
+                        <% series.forEach(function(element){ %>    
+                            <option value="<%- element.id %>"><%- element.content %></option>
+                        <% }) %>
+                    </select>
+
+                    <select class="form-select mt-2" aria-label="Disabled select example" disabled>
+                    <option value="" selected disabled>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                    </select>
+
+                    <select class="form-select mt-2" aria-label="Disabled select example" disabled>
+                    <option value="" selected disabled>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                    </select>
+
+                    <select class="form-select mt-2" aria-label="Disabled select example" disabled>
+                    <option value="" selected disabled>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                    </select>
+                </div>
+            </form>
         </div>
     </div>
 </div>

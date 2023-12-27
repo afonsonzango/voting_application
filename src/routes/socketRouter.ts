@@ -101,5 +101,65 @@ module.exports = function socketConnection(server: Server) {
                 socket.emit('setResults', results);
             });
         }); 
+
+        socket.on('getWarierInformations', async function(data) {
+            try {
+                const [warier]:any = await connection.promise().query(`SELECT * FROM wariers WHERE id = ?`, [data]);
+                socket.emit('setUpWarier', warier);
+            } catch (error) {
+                throw error;
+            };
+        });
+
+        socket.on('setUpNewBattle', async function(data){
+            try {
+                await connection.promise().query(`UPDATE battles SET status = ?`, [0]);
+                await connection.promise().query(`
+                     	 INSERT INTO battles SET
+                     	 
+                         warier_id1 = ?, 
+                         warier_id2 = ?, 
+                         keySerie_1 = ?, 
+                         keySerie_2 = ?, 
+                         keySerie_3 = ?, 
+                         keySerie_4 = ?,
+                         status = ?`,
+
+                     [
+                         data.warier1, 
+                         data.warier2, 
+                         data.keySeries1, 
+                         data.keySeries2, 
+                         data.keySeries3, 
+                         data.keySeries4,
+                         1
+                     ]
+                );
+
+                const keySeriesObject = [
+                    data.keySeries1, 
+                    data.keySeries2, 
+                    data.keySeries3, 
+                    data.keySeries4
+                ];
+                
+                keySeriesObject.forEach(async (element) => {
+                    if(element){
+						await connection.promise().query(`UPDATE series SET useable = ? WHERE id = ?`, [0, element]);
+						console.log(element);
+					}
+                });
+                
+                socket.emit('removeLoader');
+            } catch (error){
+                console.log(error);
+            }
+        });
+
+        //Verificar se há batalhas activas
+        socket.on('verfifyActiveBattle', async function(){
+            const [battle]:any = await connection.promise().query(`SELECT * FROM battles WHERE status = 1`);            
+            socket.emit('battleStatusResponse', battle);
+        });
     });
 }

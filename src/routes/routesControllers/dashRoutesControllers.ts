@@ -1,21 +1,25 @@
 import connection from "../../dataCenter";
 import { Request, Response } from "express";
 
-
 class dashRoutes {
     async arquiveVotation(req: Request, res: Response) {
+        const [series]:any = await connection.promise().query('SELECT * FROM series WHERE useable = ?', [1]);
+
         res.status(200).render('pages/private/admin-votation', {
             title: 'Dashboard',
             css: 'private/admin-dash.css',
             bootstrap: true,
             js: '',
             socketConnection: true,
-            adminJsFiles: true
+            adminJsFiles: true,
+            series
         });
     }
 
     async arquiveKeys(req: Request, res: Response) {
         try {
+            const [series]:any = await connection.promise().query('SELECT * FROM series WHERE useable = ?', [1]);
+
             const getAllData = () => {
                 return new Promise((resolve, reject) => {
                     let rowObject: any = {};
@@ -34,7 +38,8 @@ class dashRoutes {
                                 js: '',
                                 socketConnection: true,
                                 adminJsFiles: true,
-                                ObjectOverKey: []
+                                ObjectOverKey: [],
+                                series
                             });
                         }
 
@@ -86,6 +91,7 @@ class dashRoutes {
         const keys_id = req.params.keys_id;
 
         try {
+            const [series_useable]:any = await connection.promise().query('SELECT * FROM series WHERE useable = ?', [1]);
             const [series]: any = await connection.promise().query(`SELECT * FROM series WHERE id = ?`, [keys_id]);
 
             if (series.length == 0) {
@@ -114,7 +120,8 @@ class dashRoutes {
                     js: '',
                     socketConnection: true,
                     adminJsFiles: true,
-                    credentialsList: response
+                    credentialsList: response,
+                    series: series_useable
                 });
 
                 console.log(response);
@@ -125,8 +132,8 @@ class dashRoutes {
     }
 
     async arquiveWariesAll(req: Request, res: Response) {
-
         try {
+            const [series]:any = await connection.promise().query('SELECT * FROM series WHERE useable = ?', [1]);
             const [waries]:any = await connection.promise().query(`SELECT * FROM wariers ORDER BY id DESC`);
 
             res.status(200).render('pages/private/admin-waries', {
@@ -136,7 +143,8 @@ class dashRoutes {
                 js: '',
                 socketConnection: true,
                 adminJsFiles: true,
-                waries: waries 
+                waries: waries,
+                series: series
             });   
         } catch (error) {
             res.json({

@@ -43,7 +43,86 @@ socket.on('setResults', function(data_array){
 function setWarierItem() {
     document.querySelectorAll('.s-warier-item').forEach(function(element){
         element.addEventListener('click', function(){
-            alert(element.getAttribute('data-value'));
+            const userID = element.getAttribute('data-value');
+
+            socket.emit('getWarierInformations', userID);
         });
     });
 }
+
+socket.on('setUpWarier', function(data){
+    setWarierField(data);
+});
+
+function setWarierField(data) {
+    var wElement = document.querySelectorAll('.w-element');
+    var data = data[0];
+
+    if(!wElement[0].querySelector('input').value){
+        wElement[0].querySelector('.warierSetUp').value = data.id;
+        wElement[0].querySelector('img').src = data.img;
+        wElement[0].querySelector('.profile-name').innerHTML = data.nome;
+    }else if(!wElement[1].querySelector('input').value){
+        wElement[1].querySelector('.warierSetUp').value = data.id;
+        wElement[1].querySelector('img').src = data.img;
+        wElement[1].querySelector('.profile-name').innerHTML = data.nome;    
+        
+        document.querySelector('.warier-select').style.display = 'none'
+        document.getElementById('formSubmitElement').innerHTML += `
+            <input type="submit" value="Criar batalha" class="submit_battle">
+        `
+        document.getElementById('selectAbleSection').style.display = 'block'
+    }
+
+    inputSeachItem.value = ''
+    document.getElementById('palet_el').innerHTML = ''
+}
+
+
+
+//---------------- Enviar dados à DB -----------------//
+
+//Edvitar refresh
+document.getElementById('formSubmitElement').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const warObject = {
+        warier1: e.target[1].value,
+        warier2: e.target[2].value,
+        keySeries1: e.target[3].value,
+        keySeries2: e.target[4].value,
+        keySeries3: e.target[5].value,
+        keySeries4: e.target[6].value,
+    }
+
+    document.getElementById('absolute-loader').innerHTML = `
+        <div class="spin-ld">
+            Spining
+        </div>
+    `
+    socket.emit('setUpNewBattle', warObject);
+});
+
+socket.on('removeLoader', function(){
+
+    setTimeout(() => {
+        document.getElementById('absolute-loader').innerHTML = `
+            <div class="final-ld">
+                <div>
+                    Batalha criada com sucesso! Clique aqui para visualizar.
+                    <br>
+                    <a href="" class="btn btn-primary">Ok</a>
+                </div>
+            </div>
+        `
+    }, 2000);
+});
+
+
+//------------------ Verificar de há batalhas online -----------------
+
+socket.emit('verfifyActiveBattle');
+
+socket.on('verfifyActiveBattle', function(){
+    
+});

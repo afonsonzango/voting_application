@@ -157,6 +157,73 @@ body * {
 .modal.warier_exampleModal .modal-dialog .modal-content {
   border-radius: 0;
 }
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .absolute-done {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5607843137);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .absolute-done:after {
+  content: "";
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  border: 3px solid rgba(0, 0, 0, 0.5);
+  border-right-color: transparent;
+  display: block;
+  animation: 0.6s roller infinite linear;
+}
+@keyframes roller {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .spin-ld {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9450980392);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .spin-ld:after {
+  content: "";
+  width: 40px;
+  height: 40px;
+  border-right-color: transparent;
+  border: 2px solid rgba(0, 0, 0, 0.8);
+  animation: 0.6s infinite roller linear;
+}
+@keyframes roller {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .final-ld {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.9450980392);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .final-ld div {
+  width: 80%;
+  padding: 0 5%;
+  text-align: center;
+}
 .modal.warier_exampleModal .modal-dialog .modal-content .modal-body .warier-select {
   position: relative;
 }
@@ -237,4 +304,77 @@ body * {
   font-size: 15px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.8);
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .war-setup {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .war-setup .gap-el {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 14px;
+  font-family: var(--fml-secondary);
+  justify-content: center;
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .war-setup .w-element {
+  width: 50%;
+  padding: 20px 10px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .war-setup .w-element .profile-pic {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  left: 0;
+  right: 0;
+  margin: auto;
+  overflow: hidden;
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .war-setup .w-element .profile-pic img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .war-setup .w-element .profile-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.85);
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .war-setup .w-element .profile-name span {
+  width: 100%;
+  height: 15px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  display: block;
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .submit_battle {
+  width: 100%;
+  height: 45px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  color: #fff;
+  background-color: rgb(0, 4, 255);
+  border-radius: 4px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+.modal.warier_exampleModal .modal-dialog .modal-content .modal-body .keySeries-select select {
+  border-radius: 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.88);
+  cursor: pointer;
 }/*# sourceMappingURL=main.css.map */
