@@ -18,19 +18,19 @@ class dashRoutes {
 
     async arquiveKeys(req: Request, res: Response) {
         try {
-            const [series]:any = await connection.promise().query('SELECT * FROM series WHERE useable = ?', [1]);
-
+            const [series_availeable]:any = await connection.promise().query('SELECT * FROM series WHERE useable = ?', [1]);
+            
             const getAllData = () => {
                 return new Promise((resolve, reject) => {
                     let rowObject: any = {};
-
-                    connection.query(`SELECT * FROM series ORDER BY id DESC`, function (error: any, series: any) {
+                    
+                    connection.query(`SELECT * FROM series ORDER BY id DESC`, function (error: any, all_series: any) {
                         if (error) {
                             reject(error);
                             return;
                         }
 
-                        if (series.length == 0) {
+                        if (all_series.length == 0) {
                             res.status(200).render('pages/private/admin-keys', {
                                 title: 'Dashboard',
                                 css: 'private/admin-dash.css',
@@ -39,15 +39,15 @@ class dashRoutes {
                                 socketConnection: true,
                                 adminJsFiles: true,
                                 ObjectOverKey: [],
-                                series
+                                series: series_availeable
                             });
                         }
 
                         // Contador para rastrear consultas concluídas
                         let completedQueries = 0;
 
-                        for (let i = 0; i < series.length; i++) {
-                            const _series = series[i];
+                        for (let i = 0; i < all_series.length; i++) {
+                            const _series = all_series[i];
 
                             connection.query(`SELECT * FROM credential WHERE series_id = ?`, [_series.id], function (error: any, credentials: any) {
                                 const rowLine = {
@@ -60,7 +60,7 @@ class dashRoutes {
 
                                 // Verificar se todas as consultas foram concluídas
                                 completedQueries++;
-                                if (completedQueries === series.length) {
+                                if (completedQueries === all_series.length) {
                                     resolve(rowObject);
                                 }
                             });
@@ -77,7 +77,8 @@ class dashRoutes {
                     js: '',
                     socketConnection: true,
                     adminJsFiles: true,
-                    ObjectOverKey: result
+                    ObjectOverKey: result,
+                    series: series_availeable
                 });
             }).catch((error) => {
                 console.error(error);
@@ -152,6 +153,33 @@ class dashRoutes {
                 mensagem: 'Erro interno da aplicação.',
                 _error: error
             })
+        }
+    }
+
+    async watch (req: Request, res: Response) {
+        const [battleActive]:any = await connection.promise().query(`SELECT * FROM battles WHERE status = ?`, [1]);
+
+        if(battleActive.length == 1){
+            const [warier1]:any = await connection.promise().query('SELECT * FROM wariers WHERE id = ?', [battleActive[0].warier_id1]);
+            const [warier2]:any = await connection.promise().query('SELECT * FROM wariers WHERE id = ?', [battleActive[0].warier_id2]);
+
+            const battle = {
+                battleActive,
+                wariers: {
+                    warier1,
+                    warier2
+                }
+            }
+
+            res.status(200).render('pages/private/vote-scale', {
+                title: 'Watch Votation',
+                css: 'private/vote-scale.css',
+                bootstrap: true,
+                js: '',
+                socketConnection: true,
+                adminJsFiles: true,
+                battle
+            });
         }
     }
 }

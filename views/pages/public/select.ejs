@@ -1,3 +1,6 @@
+<input type="hidden" value="<%- series %>" id="series_dom_id">
+<input type="hidden" value="<%- content %>" id="key_dom_id">
+<br>
 <section class="main-class">
     <div class="center-copper">
         <div id="step-1" class="texts mb-5">
@@ -20,13 +23,17 @@
     
             <div class="people">
                 <div class="profile" onclick="">
-                    <div class="image"></div>
-                    <div class="name">Kangadji</div>
+                    <div class="image">
+                        <img src="<%- battle.wariers.warier1[0].img %>" alt="">
+                    </div>
+                    <div class="name"><%- battle.wariers.warier1[0].nome %></div>
                     <input type="radio" name="select-person" id="">
                 </div>
                 <div class="profile" onclick="">
-                    <div class="image"></div>
-                    <div class="name">Panchulaneino rininwricvrwi ri</div>
+                    <div class="image">
+                        <img src="<%- battle.wariers.warier2[0].img %>" alt="">
+                    </div>
+                    <div class="name"><%- battle.wariers.warier2[0].nome %></div>
                     <input type="radio" name="select-person" id="">
                 </div>
             </div>

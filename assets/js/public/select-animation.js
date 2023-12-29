@@ -7,9 +7,9 @@ document.getElementById('nextStep').addEventListener('click', function(){
     setTimeout(() => {
         step1.style.display = 'none';
         step2.style.display = 'block';    
-    }, 800);
+    }, 400);
     
     setTimeout(() => {
         step2.style.opacity = '1';
-    }, 1000);
+    }, 600);
 });
