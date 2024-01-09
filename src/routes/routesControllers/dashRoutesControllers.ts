@@ -163,12 +163,23 @@ class dashRoutes {
             const [warier1]:any = await connection.promise().query('SELECT * FROM wariers WHERE id = ?', [battleActive[0].warier_id1]);
             const [warier2]:any = await connection.promise().query('SELECT * FROM wariers WHERE id = ?', [battleActive[0].warier_id2]);
 
+            console.log(warier1);
+            console.log(warier2);
+
             const battle = {
                 battleActive,
                 wariers: {
                     warier1,
                     warier2
                 }
+            }
+
+            const [votesW1]:any = await connection.promise().query('SELECT * FROM set_votes WHERE battle_id = ? AND warier_selected = ?', [battleActive[0].id, warier1[0].id]);
+            const [votesW2]:any = await connection.promise().query('SELECT * FROM set_votes WHERE battle_id = ? AND warier_selected = ?', [battleActive[0].id, warier2[0].id]);
+
+            const votes = {
+                w1: votesW1.length,
+                w2: votesW2.length
             }
 
             res.status(200).render('pages/private/vote-scale', {
@@ -178,7 +189,8 @@ class dashRoutes {
                 js: '',
                 socketConnection: true,
                 adminJsFiles: true,
-                battle
+                battle,
+                votes
             });
         }
     }

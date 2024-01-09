@@ -97,7 +97,6 @@ module.exports = function socketConnection(server: Server) {
         socket.on('getWariersBySearch', function(data) {
             connection.query('SELECT * FROM wariers WHERE nome LIKE ? LIMIT 6', ['%'+data+'%'], function(error, results){
                 if(error) throw error;
-                console.log(results);
                 socket.emit('setResults', results);
             });
         }); 
@@ -146,7 +145,6 @@ module.exports = function socketConnection(server: Server) {
                 keySeriesObject.forEach(async (element) => {
                     if(element){
 						await connection.promise().query(`UPDATE series SET useable = ? WHERE id = ?`, [0, element]);
-						console.log(element);
 					}
                 });
                 
@@ -160,6 +158,24 @@ module.exports = function socketConnection(server: Server) {
         socket.on('verfifyActiveBattle', async function(){
             const [battle]:any = await connection.promise().query(`SELECT * FROM battles WHERE status = 1`);            
             socket.emit('battleStatusResponse', battle);
+        });
+
+        //Receber dados, salvar os votos e invalidar chave
+        socket.on('setUpVote', async function(data){
+            const [verifyKey]:any = await connection.promise().query(`SELECT * FROM credential WHERE id = ? AND status = ?`, [data.key_dom_id, 1]);
+            try {
+                if(verifyKey.length != 0) {
+                    await connection.promise().query(`INSERT INTO set_votes SET battle_id = ?, key_id = ?, warier_selected = ?`, [data.battle_id, data.key_dom_id, data.warierId]);
+                    await connection.promise().query(`UPDATE credential SET status = ? WHERE id = ?`, [0, data.key_dom_id]);
+                    
+                    socket.broadcast.emit('voteSettedTo', data);
+                    socket.emit('voteSettedTo', data);
+                }else{
+                    console.log('Chave expirada.');
+                }
+            } catch (error) {
+                console.error('Erro: ' +error);
+            }
         });
     });
 }

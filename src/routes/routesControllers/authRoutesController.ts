@@ -40,21 +40,50 @@ class authRoutes {
         try {
             const [getSeries]:any = await connection.promise().query(`SELECT * FROM series WHERE content = ?`, [splited[0]]);
 
-            if(getSeries){
+            if(getSeries.length != 0){
                 const [getKey]:any = await connection.promise().query(`SELECT * FROM credential WHERE series_id = ? AND content = ?`, [getSeries[0].id, splited[1]]);
-
                 if(getKey.length != 0){
                     if(getKey[0].status == 1){
-                        console.log('Chave válida');
-                        res.redirect(`/voting/select/${getSeries[0].id}/${getKey[0].id}`)
+                        //Chave é válida
+                        res.redirect(`/voting/select/${getSeries[0].content}/${getKey[0].content}`)
                     }else{
-                        console.log('Chave Expirada');
+                        //Chave está expirada, quer dizer que alguem já usou
+                        //Envie mensagem para ser renderizando que a chave já foi usada
+                        res.status(500).render('pages/public/errors/invalid-keys', {
+                            errorHandleMessage: 'Chave Expirada',
+                            title: 'Selecionar canditado',
+                            css: '/public/errors.css',
+                            js: '',
+                            bootstrap: false,
+                            socketConnection: false,
+                            adminJsFiles: false
+                        });
                     }
                 } else {
-                    console.log('Chave Inválida');
+                    //Chave está inválida
+                    //Quer dizer que escreveu a chave erradamente
+                    res.status(500).render('pages/public/errors/invalid-keys', {
+                        errorHandleMessage: 'Chave Inválida',
+                        title: 'Selecionar canditado',
+                        css: '/public/errors.css',
+                        js: '',
+                        bootstrap: false,
+                        socketConnection: false,
+                        adminJsFiles: false
+                    });
                 }
             } else {
-                console.log('Não existe tal serie inserida.');
+                //Chave inválida
+                //Response, de chave inválida
+                res.status(500).render('pages/public/errors/invalid-keys', {
+                    errorHandleMessage: 'Não existe tal serie inserida.',
+                    title: 'Selecionar canditado',
+                    css: '/public/errors.css',
+                    js: '',
+                    bootstrap: false,
+                    socketConnection: false,
+                    adminJsFiles: false
+                });
             }
         } catch (error) {
             throw error;

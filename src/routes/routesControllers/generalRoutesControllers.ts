@@ -56,6 +56,9 @@ class generalRoutes {
         const {series, content}:any = req.params
         const [getVotingStatus]:any = await connection.promise().query(`SELECT * FROM battles WHERE status = ?`, [1]);
 
+        const [series_id]:any = await connection.promise().query(`SELECT * FROM series WHERE content = ?`, [series]); 
+        const [key_content]:any = await connection.promise().query(`SELECT * FROM credential WHERE content = ?`, [content]); 
+
         const availabelSeries = {
             keySeries_1: getVotingStatus[0].keySerie_1,
             keySeries_2: getVotingStatus[0].keySerie_2,
@@ -78,18 +81,48 @@ class generalRoutes {
         //Setup Object Field Lines
         
         //Verfify keys integrity
-        if(availabelSeries.keySeries_1 == series || availabelSeries.keySeries_2 == series || availabelSeries.keySeries_3 == series || availabelSeries.keySeries_4 == series) {
-            const [verifyIdentCredSeries]:any = await connection.promise().query(`SELECT * FROM credential WHERE series_id = ? AND id = ?`, [series, content]);
+        if(availabelSeries.keySeries_1 == series_id[0].id || availabelSeries.keySeries_2 == series_id[0].id || availabelSeries.keySeries_3 == series_id[0].id || availabelSeries.keySeries_4 == series_id[0].id) {
+            const [verifyIdentCredSeries]:any = await connection.promise().query(`SELECT * FROM credential WHERE series_id = ? AND id = ?`, [series_id[0].id, key_content[0].id]);
             
             if(verifyIdentCredSeries.length != 0){
                 if(verifyIdentCredSeries[0].status != 1){
-                    console.log('Chave Expirada');
+                    //Chave está expirada, quer dizer que alguem já usou
+                    //Envie mensagem para ser renderizando que a chave já foi usada
+                    res.status(500).render('pages/public/errors/invalid-keys', {
+                        errorHandleMessage: 'Chave Expirada',
+                        title: 'Selecionar canditado',
+                        css: '/public/errors.css',
+                        js: '',
+                        bootstrap: false,
+                        socketConnection: false,
+                        adminJsFiles: false
+                    });
                 }
             }else{
-                console.log('Chave não existe');
+                //Chave está inexistente
+                //Quer dizer que a chave não existe, mesmo que exista a serie
+                res.status(500).render('pages/public/errors/invalid-keys', {
+                    errorHandleMessage: 'Chave inexistente',
+                    title: 'Selecionar canditado',
+                    css: '/public/errors.css',
+                    js: '',
+                    bootstrap: false,
+                    socketConnection: false,
+                    adminJsFiles: false
+                });
             }
         }else{
-            console.log('Chave Inválida');
+            //Chave está inválida
+            //Quer dizer que escreveu a chave erradamente ou a serie não foi atrelada à actual votação
+            res.status(500).render('pages/public/errors/invalid-keys', {
+                errorHandleMessage: 'Série Inexistente ou não atrelada à votação',
+                title: 'Selecionar canditado',
+                css: '/public/errors.css',
+                js: '',
+                bootstrap: false,
+                socketConnection: false,
+                adminJsFiles: false
+            });
         }
         //Verfify keys integrity
 
@@ -99,10 +132,10 @@ class generalRoutes {
                 css: 'public/select.css',
                 js: 'public/select-animation.js',
                 bootstrap: true,
-                socketConnection: false,
-                adminJsFiles: false,
-                series, 
-                content,
+                socketConnection: true,
+                adminJsFiles: true,
+                series: series_id[0].id, 
+                content: key_content[0].id,
                 battle
             });
         } catch (error) {
