@@ -110,7 +110,7 @@ module.exports = function socketConnection(server: Server) {
             };
         });
 
-        socket.on('setUpNewBattle', async function(data){
+        socket.on('setUpNewBattle', async function(data :any){
             try {
                 await connection.promise().query(`UPDATE battles SET status = ?`, [0]);
                 await connection.promise().query(`
@@ -127,10 +127,10 @@ module.exports = function socketConnection(server: Server) {
                      [
                          data.warier1, 
                          data.warier2, 
-                         data.keySeries1, 
-                         data.keySeries2, 
-                         data.keySeries3, 
-                         data.keySeries4,
+                         Number(data.keySeries1), 
+                         Number(data.keySeries2), 
+                         Number(data.keySeries3), 
+                         Number(data.keySeries4),
                          1
                      ]
                 );
