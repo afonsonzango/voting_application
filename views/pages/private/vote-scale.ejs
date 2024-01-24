@@ -1,26 +1,79 @@
 <section class="main-section-select">
-    <div class="middle-efect">
-        <div class="bilt-block">
-            <div class="upper" id="upperBar1"></div>
-            <div class="person">
-                <div class="image">
-                    <img src="<%- battle.wariers.warier1[0].img %>" alt="">
+    <div class="votes-controllers">
+        <div class="middle-efect">
+            <div class="bilt-block">
+                <div class="upper" id="upperBar1"></div>
+                <div class="person">
+                    <div class="image">
+                        <img src="<%- battle.wariers.warier1[0].img %>" alt="">
+                    </div>
+    
+                    <input type="hidden" value="<%- votes.w1 %>" data-id="<%- battle.wariers.warier1[0].id %>"
+                        class="voteSetter" id="warier1" />
+                    <div class="name"><%- battle.wariers.warier1[0].nome %></div>
                 </div>
-                
-                <input type="hidden" value="<%- votes.w1 %>" data-id="<%- battle.wariers.warier1[0].id %>" class="voteSetter" id="warier1"/>
-                <div class="name"><%- battle.wariers.warier1[0].nome %></div>
+            </div>
+            <div class="bilt-block">
+                <div class="upper" id="upperBar2"></div>
+                <div class="person">
+                    <div class="image">
+                        <img src="<%- battle.wariers.warier2[0].img %>" alt="">
+                    </div>
+    
+                    <input type="hidden" value="<%- votes.w2 %>" data-id="<%- battle.wariers.warier2[0].id %>"
+                        class="voteSetter" id="warier2" />
+                    <div class="name"><%- battle.wariers.warier2[0].nome %></div>
+                </div>
             </div>
         </div>
-        <div class="bilt-block">
-            <div class="upper" id="upperBar2"></div>
-            <div class="person">
-                <div class="image">
-                    <img src="<%- battle.wariers.warier2[0].img %>" alt="">
+    
+        <div class="endVotation" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button class="end-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+                </svg>
+                Terminar
+            </button>
+        </div>
+    
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="title">Deseja fechar?</div>
+                        <div class="text">Lorem ipsum dolor voluptatem qui atque voluptas soluta earum at quisquam tempora, accusantium provident error voluptate, iusto placeat voluptatum inventore?</div>
+                        <div class="controlls">
+                            <button class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                            <button class="btn btn-danger" data-end-votation>Terminar</button>
+                        </div>
+                    </div>
                 </div>
-                
-                <input type="hidden" value="<%- votes.w2 %>" data-id="<%- battle.wariers.warier2[0].id %>" class="voteSetter" id="warier2"/>
-                <div class="name"><%- battle.wariers.warier2[0].nome %></div>
             </div>
         </div>
+    </div>
+
+    <div class="btn-back-button">
+        <a href="/dashboard/arquive-votation">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+            </svg>
+            Regressar
+        </a>
+    </div>
+    <div class="aftervote" style="display: none;">
+        <div class="person" data-person1>
+            <img src="<%- battle.wariers.warier1[0].img %>" alt="">
+            <div class="values" data-voted1>0</div>
+        </div>
+        <div class="iconsvs">
+            <svg version="1.1" id="Uploaded to svgrepo.com" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .flatshadows_een{fill:#FDFFFF;} .flatshadows_twee{fill:#E1E5E5;} .flatshadows_drie{fill:#C4CCCC;} .flatshadows_vier{fill:#A3AFAF;} .flatshadows_vijf{fill:#8D9999;} .st0{fill:#C4CCCC;} .st1{fill:#E1E5E5;} </style> <g> <polygon class="flatshadows_drie" points="29,2 26,2 7,20 11,24 29,5 "></polygon> <polygon class="flatshadows_vier" points="29,2 9,22 11,24 29,5 "></polygon> <rect x="4.257" y="21.793" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 -1.3995 44.4203)" class="flatshadows_drie" width="8.485" height="1.414"></rect> <rect x="-0.743" y="26.793" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 -13.4706 49.4203)" class="flatshadows_drie" width="8.485" height="1.414"></rect> <rect x="3.172" y="22.879" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -15.9203 11.565)" class="flatshadows_vier" width="5.657" height="4.243"></rect> <polygon class="flatshadows_twee" points="3,2 3,5 21,24 25,20 6,2 "></polygon> <rect x="19.257" y="21.793" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 56.0269 21.7929)" class="flatshadows_twee" width="8.485" height="1.414"></rect> <rect x="24.257" y="26.793" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 68.098 26.7929)" class="flatshadows_twee" width="8.485" height="1.414"></rect> <polygon class="flatshadows_een" points="3,2 23,22 25,20 6,2 "></polygon> <rect x="23.172" y="22.879" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 26.7071 61.0624)" class="flatshadows_drie" width="5.657" height="4.243"></rect> <polygon class="flatshadows_vijf" points="9.5,24.5 6.5,21.5 6.5,27.5 "></polygon> <polygon class="flatshadows_vier" points="25.5,21.5 22.5,24.5 25.5,27.5 "></polygon> <polygon class="flatshadows_vijf" points="12.381,22.542 16,18.722 14.189,16.811 12.381,18.619 "></polygon> <g> <g> <polygon class="flatshadows_vier" points="14.189,16.811 12.381,14.902 12.381,18.619 "></polygon> <rect x="14.191" y="18.001" class="flatshadows_vier" width="0" height="5.262"></rect> </g> <g> <polygon class="flatshadows_vier" points="14.189,16.811 12.381,14.902 12.381,18.619 "></polygon> <rect x="14.191" y="18.001" class="flatshadows_vier" width="0" height="5.262"></rect> </g> </g> </g> </g></svg>
+        </div>
+        <div class="person" data-person2>
+            <img src="<%- battle.wariers.warier2[0].img %>" alt="">
+            <div class="values" data-voted2>0</div>
+        </div>
+
     </div>
 </section>

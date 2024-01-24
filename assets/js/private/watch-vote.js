@@ -26,3 +26,39 @@ setTimeout(() => {
     refreshChart(warier1, upperBar1);
     refreshChart(warier2, upperBar2);
 }, 1000);
+
+
+//End the votation
+var dataEndVotation = document.querySelector('[data-end-votation]');
+
+//Send the sock to finish in back end
+dataEndVotation.addEventListener('click', () => {
+    socket.emit("endvotation");
+});
+
+//Receive the confirmation of the end of the process
+socket.on('battlefinished', (data) => {
+    changestatus(data)
+});
+//End the votation
+
+
+const changestatus = (data) => {
+    var current = document.querySelector('.votes-controllers');
+    var setup = document.querySelector('.aftervote');
+
+    document.querySelector('[data-bs-dismiss="modal"]').click();
+    current.remove();
+
+    if(data.forWr1 > data.forWr2) {
+        document.querySelector('[data-person1]').classList.add("winner");
+    } else if (data.forWr2 > data.forWr1) {
+        document.querySelector('[data-person2]').classList.add("winner");
+    } else {
+    }
+
+    document.querySelector('[data-voted1]').innerText = data.forWr1 
+    document.querySelector('[data-voted2]').innerText = data.forWr2
+
+    setup.style.display = "flex"
+}

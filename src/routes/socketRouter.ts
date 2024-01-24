@@ -4,7 +4,7 @@ import { generateIds } from '../utilities/keyGenerator';
 import { seriesGenerator } from '../utilities/seriesGenerator';
 import connection from '../dataCenter';
 import { Request, Response } from 'express';
-import fs from "fs";
+import fs, { copyFileSync } from "fs";
 
 module.exports = function socketConnection(server: Server) {
     const io: SocketIOServer = require('socket.io')(server, {
@@ -165,6 +165,7 @@ module.exports = function socketConnection(server: Server) {
             const [verifyKey]:any = await connection.promise().query(`SELECT * FROM credential WHERE id = ? AND status = ?`, [data.key_dom_id, 1]);
             try {
                 if(verifyKey.length != 0) {
+                    console.log(data.key_dom_id);
                     await connection.promise().query(`INSERT INTO set_votes SET battle_id = ?, key_id = ?, warier_selected = ?`, [data.battle_id, data.key_dom_id, data.warierId]);
                     await connection.promise().query(`UPDATE credential SET status = ? WHERE id = ?`, [0, data.key_dom_id]);
                     
@@ -175,6 +176,35 @@ module.exports = function socketConnection(server: Server) {
                 }
             } catch (error) {
                 console.error('Erro: ' +error);
+            }
+        });
+
+        //Terminar batalha
+        socket.on('endvotation', async function() {
+            try {
+                const [battle]:any = await connection.promise().query(`SELECT * FROM battles WHERE status = 1`);
+                
+                if (battle.length == 1) {
+                    const wariers = [battle[0].warier_id1, battle[0].warier_id2];
+                    const _battle = battle[0].id;
+
+                    const [voltesForWr1]:any = await connection.promise().query(`SELECT * FROM set_votes WHERE battle_id = ? AND warier_selected = ?`, [_battle, wariers[0]]);
+                    const [voltesForWr2]:any = await connection.promise().query(`SELECT * FROM set_votes WHERE battle_id = ? AND warier_selected = ?`, [_battle, wariers[1]]);
+                    
+                    const battleResults:any = {
+                        forWr1: voltesForWr1.length,
+                        forWr2: voltesForWr2.length
+                    }
+
+                    await connection.promise().query('UPDATE battles SET warier_votes_1 = ?, warier_votes_2 = ? WHERE id = ?', [battleResults.forWr1, battleResults.forWr2, _battle]);
+                    await connection.promise().query('UPDATE battles SET status = 0');
+
+                    socket.emit('battlefinished', battleResults);
+                }else{
+                    console.log("Algo deu errado.");
+                }
+            } catch (error) {
+                console.log(error);
             }
         });
     });

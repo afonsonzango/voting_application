@@ -50,4 +50,151 @@ section.main-section-select .middle-efect .bilt-block .person .name {
   font-weight: 600;
   color: rgba(0, 0, 0, 0.8);
   margin-top: 10px;
+}
+
+.endVotation {
+  position: absolute;
+  z-index: 1;
+  top: 20px;
+  right: 20px;
+}
+.endVotation button {
+  padding: 8px 20px;
+  background-color: rgb(201, 11, 11);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+.endVotation button:hover {
+  background-color: rgb(240, 6, 6);
+}
+.endVotation button:active {
+  transition: 0.08s;
+  transform: scale(0.95);
+}
+.endVotation button svg {
+  width: 20px;
+  height: 20px;
+}
+.endVotation button svg path {
+  fill: #fff;
+}
+
+.modal-content {
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: none;
+  padding: 15px;
+}
+.modal-content .title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #000;
+  margin-bottom: 10px;
+}
+.modal-content .text {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.8);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.modal-content .controlls {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+.modal-content .controlls button {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #fff;
+  font-weight: 600;
+  padding: 8px 20px;
+}
+
+.aftervote {
+  height: 100vh;
+  align-items: center;
+  gap: 20px;
+}
+.aftervote .person {
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+.aftervote .person img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.aftervote .person.winner {
+  width: 200px;
+  height: 200px;
+  box-shadow: 0 0 0 5px rgb(255, 255, 255), 0 0 0 10px #008000;
+  margin-right: 10px;
+}
+.aftervote .person .values {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 4px 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 14px;
+  font-family: var(--fml-secondary);
+  color: rgb(0, 0, 0);
+  font-weight: 600;
+}
+.aftervote .iconsvs {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.aftervote .iconsvs svg {
+  width: 100%;
+  height: 100%;
+}
+.aftervote .iconsvs svg path {
+  fill: rgba(0, 0, 0, 0.534);
+}
+
+.btn-back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+}
+.btn-back-button a {
+  background-color: #000;
+  padding: 8px 20px;
+  font-size: 14px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.btn-back-button a svg {
+  width: 20px;
+  height: 20px;
+}
+.btn-back-button a svg path {
+  fill: #fff;
 }/*# sourceMappingURL=vote-scale.css.map */
