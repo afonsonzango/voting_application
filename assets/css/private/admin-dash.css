@@ -349,6 +349,21 @@ body {
 .row-votationlist .col-sm-6 {
   width: 25% !important;
 }
+@media (max-width: 991px) {
+  .row-votationlist .col-sm-6 {
+    width: 33.3333333333% !important;
+  }
+}
+@media (max-width: 651px) {
+  .row-votationlist .col-sm-6 {
+    width: 50% !important;
+  }
+}
+@media (max-width: 520px) {
+  .row-votationlist .col-sm-6 {
+    width: 100% !important;
+  }
+}
 .row-votationlist .col-sm-6 .card {
   padding: 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);

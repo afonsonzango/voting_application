@@ -407,6 +407,18 @@ body {
 .row-votationlist {
     .col-sm-6 {
         width: calc(100% / 4) !important;
+        
+        @media (max-width: 991px) {
+            width: calc(100% / 3) !important;
+        }
+
+        @media (max-width: 651px) {
+            width: calc(100% / 2) !important;
+        }
+
+        @media (max-width: 520px) {
+            width: calc(100% / 1) !important;
+        }
 
         .card {
             padding: 10px;

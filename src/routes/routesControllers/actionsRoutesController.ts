@@ -5,7 +5,6 @@ import connection from "../../dataCenter";
 
 class authRoutes {
     async exportPdfKeys(req: Request, res: Response) {
-
         try {
             const [serie]: any = await connection.promise().query('SELECT * FROM series WHERE id = ?', [req.params.series]);
             const [credentials]: any = await connection.promise().query('SELECT * FROM credential WHERE series_id = ?', [serie[0].id]);

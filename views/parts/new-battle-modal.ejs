@@ -1,15 +1,18 @@
-<div class="modal fade warier_exampleModal" id="warier_exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade warier_exampleModal" id="warier_exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form class="modal-body" action="" method="POST" id="formSubmitElement">
                 <div id="absolute-loader"></div>
-                
+
                 <div class="warier-select">
                     <input type="text" class="ws-input" id="inputSeachItem">
                     <div class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                          </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
                     </div>
 
                     <div id="palet_el"></div>
@@ -38,39 +41,32 @@
                 </div>
 
                 <div class="keySeries-select mt-4" id="selectAbleSection" style="display: none;">
-                    <select class="form-select mt-2" aria-label="Disabled select example" required>
+                    <select class="form-select mt-2" aria-label="Disabled select example" data-select>
                         <option value="" disabled selected>Selecione a chave</option>
-                        <% series.forEach(function(element){ %>    
+                        <% series.forEach(function(element){ %>
                             <option value="<%- element.id %>"><%- element.content %></option>
-                        <% }) %>
+                            <% }) %>
                     </select>
 
-                    <select class="form-select mt-2" aria-label="Disabled select example" required>
+                    <select class="form-select mt-2" aria-label="Disabled select example" data-select>
                         <option value="" disabled selected>Selecione a chave</option>
-                        <% series.forEach(function(element){ %>    
+                        <% series.forEach(function(element){ %>
                             <option value="<%- element.id %>"><%- element.content %></option>
-                        <% }) %>
+                            <% }) %>
                     </select>
 
-                    <select class="form-select mt-2" aria-label="Disabled select example" disabled>
-                    <option value="" selected disabled>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <select class="form-select mt-2" aria-label="Disabled select example" data-select>
+                        <option value="" selected disabled>Selecione a chave</option>
+                        <% series.forEach(function(element){ %>
+                            <option value="<%- element.id %>"><%- element.content %></option>
+                            <% }) %>
                     </select>
 
-                    <select class="form-select mt-2" aria-label="Disabled select example" disabled>
-                    <option value="" selected disabled>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                    </select>
-
-                    <select class="form-select mt-2" aria-label="Disabled select example" disabled>
-                    <option value="" selected disabled>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <select class="form-select mt-2" aria-label="Disabled select example" data-select>
+                        <option value="" selected disabled>Selecione a chave</option>
+                        <% series.forEach(function(element){ %>
+                            <option value="<%- element.id %>"><%- element.content %></option>
+                            <% }) %>
                     </select>
                 </div>
             </form>

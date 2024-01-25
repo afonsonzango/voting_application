@@ -1,14 +1,14 @@
 var inputSeachItem = document.getElementById('inputSeachItem');
 
-inputSeachItem.addEventListener('input', function() {
-    if(this.value == ''){
+inputSeachItem.addEventListener('input', function () {
+    if (this.value == '') {
         document.getElementById('palet_el').innerHTML = ''
-    }else{   
+    } else {
         socket.emit('getWariersBySearch', this.value);
     }
 });
 
-socket.on('setResults', function(data_array){
+socket.on('setResults', function (data_array) {
     document.getElementById('palet_el').innerHTML = ''
 
     data_array.forEach(element => {
@@ -24,7 +24,7 @@ socket.on('setResults', function(data_array){
         setWarierItem();
     });
 
-    if(data_array.length == 0){
+    if (data_array.length == 0) {
         const myHtml = `
             <div class="warier no-warier">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-frown" viewBox="0 0 16 16">
@@ -41,8 +41,8 @@ socket.on('setResults', function(data_array){
 });
 
 function setWarierItem() {
-    document.querySelectorAll('.s-warier-item').forEach(function(element){
-        element.addEventListener('click', function(){
+    document.querySelectorAll('.s-warier-item').forEach(function (element) {
+        element.addEventListener('click', function () {
             const userID = element.getAttribute('data-value');
 
             socket.emit('getWarierInformations', userID);
@@ -50,7 +50,7 @@ function setWarierItem() {
     });
 }
 
-socket.on('setUpWarier', function(data){
+socket.on('setUpWarier', function (data) {
     setWarierField(data);
 });
 
@@ -58,15 +58,15 @@ function setWarierField(data) {
     var wElement = document.querySelectorAll('.w-element');
     var data = data[0];
 
-    if(!wElement[0].querySelector('input').value){
+    if (!wElement[0].querySelector('input').value) {
         wElement[0].querySelector('.warierSetUp').value = data.id;
         wElement[0].querySelector('img').src = data.img;
         wElement[0].querySelector('.profile-name').innerHTML = data.nome;
-    }else if(!wElement[1].querySelector('input').value){
+    } else if (!wElement[1].querySelector('input').value) {
         wElement[1].querySelector('.warierSetUp').value = data.id;
         wElement[1].querySelector('img').src = data.img;
-        wElement[1].querySelector('.profile-name').innerHTML = data.nome;    
-        
+        wElement[1].querySelector('.profile-name').innerHTML = data.nome;
+
         document.querySelector('.warier-select').style.display = 'none'
         document.getElementById('formSubmitElement').innerHTML += `
             <input type="submit" value="Criar batalha" class="submit_battle">
@@ -83,27 +83,68 @@ function setWarierField(data) {
 //---------------- Enviar dados à DB -----------------//
 
 //Edvitar refresh
-document.getElementById('formSubmitElement').addEventListener('submit', function(e) {
+document.getElementById('formSubmitElement').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const warObject = {
-        warier1: e.target[1].value,
-        warier2: e.target[2].value,
-        keySeries1: e.target[3].value,
-        keySeries2: e.target[4].value,
-        keySeries3: e.target[5].value,
-        keySeries4: e.target[6].value,
-    }
+    // Obter todos os elementos de select
+    var selects = document.querySelectorAll('[data-select]');
 
-    document.getElementById('absolute-loader').innerHTML = `
-        <div class="spin-ld">
-            Spining
-        </div>
-    `
-    socket.emit('setUpNewBattle', warObject);
+    // Array para armazenar os valores dos selects
+    var values = [];
+
+    // Flag para verificar se há algum valor duplicado
+    var hasDuplicates = false;
+
+    // Percorrer os selects
+    selects.forEach((select, index) => {
+        // Obter o valor do select atual
+        var value = select.value;
+
+        // Verificar se o valor já está presente no array, permitindo valores vazios
+        if (values.includes(value) && value !== "") {
+            hasDuplicates = true;
+            // Adicionar uma lógica para lidar com a duplicata, se necessário
+            // Por exemplo, exibir uma mensagem de erro ou impedir o envio do formulário
+            console.log('Duplicata encontrada: ' + value);
+        } else {
+            // Adicionar o valor ao array
+            values.push(value);
+        }
+
+        // Se for o primeiro select e estiver vazio
+        if (index === 0 && value === "") {
+            hasDuplicates = true;
+            // Adicionar uma lógica para lidar com o primeiro select vazio, se necessário
+            // Por exemplo, exibir uma mensagem de erro ou impedir o envio do formulário
+            console.log('O primeiro select não pode ser vazio.');
+        }
+    });
+
+    // Se não houver duplicatas, você pode prosseguir com o envio do formulário
+    if (!hasDuplicates) {
+        // Lógica para enviar o formulário ou realizar outras ações
+        console.log('Formulário enviado com sucesso!');
+        const warObject = {
+            warier1: e.target[1].value,
+            warier2: e.target[2].value,
+            keySeries1: e.target[3].value,
+            keySeries2: e.target[4].value,
+            keySeries3: e.target[5].value,
+            keySeries4: e.target[6].value,
+        }
+    
+        document.getElementById('absolute-loader').innerHTML = `
+            <div class="spin-ld"></div>
+        `
+        socket.emit('setUpNewBattle', warObject);
+        // document.querySelector("#formSubmitElement").submit(); // Se desejar enviar o formulário automaticamente
+    } else {
+        // Exibir um alerta informando que o formulário não está bom
+        alert('O formulário não está válido. Verifique os selects.');
+    }
 });
 
-socket.on('removeLoader', function(){
+socket.on('removeLoader', function () {
 
     setTimeout(() => {
         document.getElementById('absolute-loader').innerHTML = `
@@ -122,8 +163,8 @@ socket.on('removeLoader', function(){
 //------------------ Verificar de há batalhas online -----------------
 socket.emit('verfifyActiveBattle');
 
-socket.on('battleStatusResponse', function(battle){
-    if(battle.length == 1) {
+socket.on('battleStatusResponse', function (battle) {
+    if (battle.length == 1) {
         document.getElementById('setBattleButtonActivity').innerHTML = `
             <div class="btn-group">
                 <a href="/dashboard/arquive-votation/watch" class="black-activity-button">
