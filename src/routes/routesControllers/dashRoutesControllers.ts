@@ -3,7 +3,32 @@ import { Request, Response } from "express";
 
 class dashRoutes {
     async arquiveVotation(req: Request, res: Response) {
-        const [series]:any = await connection.promise().query('SELECT * FROM series WHERE useable = ?', [1]);
+        const [series]: any = await connection.promise().query('SELECT * FROM series WHERE useable = ?', [1]);
+
+        const [results]: any = await connection.promise().query(`
+            SELECT b.*, w1.nome as nome1, w1.img as img1, w2.nome as nome2, w2.img as img2
+            FROM battles b
+            JOIN wariers w1 ON b.warier_id1 = w1.id
+            JOIN wariers w2 ON b.warier_id2 = w2.id
+            ORDER BY id DESC
+        `);
+
+        const formattedResults = results.map((result: { id: any; warier_id1: any; warier_id2: any; warier_votes_1: any; warier_votes_2: any; keySerie_1: any; keySerie_2: any; keySerie_3: any; keySerie_4: any; status: any; nome1: any; img1: any; nome2: any; img2: any; }) => ({
+            id: result.id,
+            warier_id1: result.warier_id1,
+            warier_id2: result.warier_id2,
+            warier_votes_1: result.warier_votes_1,
+            warier_votes_2: result.warier_votes_2,
+            status: result.status,
+            warier1: {
+                nome: result.nome1,
+                img: result.img1
+            },
+            warier2: {
+                nome: result.nome2,
+                img: result.img2
+            }
+        }));
 
         res.status(200).render('pages/private/admin-votation', {
             title: 'Dashboard',
@@ -12,18 +37,19 @@ class dashRoutes {
             js: '',
             socketConnection: true,
             adminJsFiles: true,
-            series
+            series,
+            battles: formattedResults
         });
     }
 
     async arquiveKeys(req: Request, res: Response) {
         try {
-            const [series_availeable]:any = await connection.promise().query('SELECT * FROM series WHERE useable = ?', [1]);
-            
+            const [series_availeable]: any = await connection.promise().query('SELECT * FROM series WHERE useable = ?', [1]);
+
             const getAllData = () => {
                 return new Promise((resolve, reject) => {
                     let rowObject: any = {};
-                    
+
                     connection.query(`SELECT * FROM series ORDER BY id DESC`, function (error: any, all_series: any) {
                         if (error) {
                             reject(error);
@@ -92,13 +118,13 @@ class dashRoutes {
         const keys_id = req.params.keys_id;
 
         try {
-            const [series_useable]:any = await connection.promise().query('SELECT * FROM series WHERE useable = ?', [1]);
+            const [series_useable]: any = await connection.promise().query('SELECT * FROM series WHERE useable = ?', [1]);
             const [series]: any = await connection.promise().query(`SELECT * FROM series WHERE id = ?`, [keys_id]);
 
             if (series.length == 0) {
                 res.status(400).send({
                     erro: true,
-                    mensagem: 'Serie inexistente'  
+                    mensagem: 'Serie inexistente'
                 });
             } else {
                 const [credentials_all]: any = await connection.promise().query(`SELECT * FROM credential WHERE series_id = ?`, [keys_id]);
@@ -108,7 +134,7 @@ class dashRoutes {
                 let response = {
                     series,
                     credentials: {
-                        credentials_all, 
+                        credentials_all,
                         credentials_usable,
                         credentials_unusable,
                     }
@@ -134,8 +160,8 @@ class dashRoutes {
 
     async arquiveWariesAll(req: Request, res: Response) {
         try {
-            const [series]:any = await connection.promise().query('SELECT * FROM series WHERE useable = ?', [1]);
-            const [waries]:any = await connection.promise().query(`SELECT * FROM wariers ORDER BY id DESC`);
+            const [series]: any = await connection.promise().query('SELECT * FROM series WHERE useable = ?', [1]);
+            const [waries]: any = await connection.promise().query(`SELECT * FROM wariers ORDER BY id DESC`);
 
             res.status(200).render('pages/private/admin-waries', {
                 title: 'Dashboard',
@@ -146,7 +172,7 @@ class dashRoutes {
                 adminJsFiles: true,
                 waries: waries,
                 series: series
-            });   
+            });
         } catch (error) {
             res.json({
                 error: true,
@@ -156,12 +182,12 @@ class dashRoutes {
         }
     }
 
-    async watch (req: Request, res: Response) {
-        const [battleActive]:any = await connection.promise().query(`SELECT * FROM battles WHERE status = ?`, [1]);
+    async watch(req: Request, res: Response) {
+        const [battleActive]: any = await connection.promise().query(`SELECT * FROM battles WHERE status = ?`, [1]);
 
-        if(battleActive.length == 1){
-            const [warier1]:any = await connection.promise().query('SELECT * FROM wariers WHERE id = ?', [battleActive[0].warier_id1]);
-            const [warier2]:any = await connection.promise().query('SELECT * FROM wariers WHERE id = ?', [battleActive[0].warier_id2]);
+        if (battleActive.length == 1) {
+            const [warier1]: any = await connection.promise().query('SELECT * FROM wariers WHERE id = ?', [battleActive[0].warier_id1]);
+            const [warier2]: any = await connection.promise().query('SELECT * FROM wariers WHERE id = ?', [battleActive[0].warier_id2]);
 
             console.log(warier1);
             console.log(warier2);
@@ -174,8 +200,8 @@ class dashRoutes {
                 }
             }
 
-            const [votesW1]:any = await connection.promise().query('SELECT * FROM set_votes WHERE battle_id = ? AND warier_selected = ?', [battleActive[0].id, warier1[0].id]);
-            const [votesW2]:any = await connection.promise().query('SELECT * FROM set_votes WHERE battle_id = ? AND warier_selected = ?', [battleActive[0].id, warier2[0].id]);
+            const [votesW1]: any = await connection.promise().query('SELECT * FROM set_votes WHERE battle_id = ? AND warier_selected = ?', [battleActive[0].id, warier1[0].id]);
+            const [votesW2]: any = await connection.promise().query('SELECT * FROM set_votes WHERE battle_id = ? AND warier_selected = ?', [battleActive[0].id, warier2[0].id]);
 
             const votes = {
                 w1: votesW1.length,

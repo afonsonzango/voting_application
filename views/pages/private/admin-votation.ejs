@@ -1,7 +1,44 @@
 <section class="main-section">
     <%- include("../../parts/navbar") %>
-    
-    <div class="page-content">
-        <h1 class="mt-4">Batalhas anteriores</h1>
-    </div>
+
+        <div class="page-content">
+            <h1 class="mt-4 mb-4">Batalhas anteriores</h1>
+
+            <div class="row row-votationlist">    
+                <% battles.forEach((element) => { %>
+                    <div class="col-sm-6">
+                        <div 
+                            class="
+                                card 
+                                <% if(element.warier_votes_2 == element.warier_votes_1){ %>same<% } %> 
+                                <% if(element.warier_votes_2 > element.warier_votes_1 && element.status == 0){ %>havewinnwe<% } %> 
+                                <% if(element.warier_votes_2 < element.warier_votes_1 && element.status == 0){ %>havewinnwe<% } %> 
+                                <% if(element.status != 0){ %>progressing<% } %>"
+                            >
+                            
+                            <div class="card-body">
+                                <div class="momr">
+                                    <div class="copper">
+                                        <div class="person <% if(element.warier_votes_1 > element.warier_votes_2){ %>winner<% } %>">
+                                            <img src="<%- element.warier1.img %>" alt="">
+                                        </div>
+                                        <div class="percent"><%- element.warier_votes_1 %></div>
+                                        <div class="name"><%- element.warier1.nome %></div>
+                                    </div>
+                                    <div class="middle-icon">vs</div>
+                                    <div class="copper">
+                                        <div class="person <% if(element.warier_votes_2 > element.warier_votes_1){ %>winner<% } %>">
+                                            <img src="<%- element.warier2.img %>" alt="">
+                                        </div>
+                                        <div class="percent"><%- element.warier_votes_2 %></div>
+                                        <div class="name"><%- element.warier2.nome %></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
 </section>

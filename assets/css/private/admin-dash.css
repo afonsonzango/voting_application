@@ -344,4 +344,147 @@ body {
   font-weight: 500;
   padding: 10px 0;
   border-radius: 4px;
+}
+
+.row-votationlist .col-sm-6 {
+  width: 25% !important;
+}
+.row-votationlist .col-sm-6 .card {
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  border-radius: 5px;
+  position: relative;
+}
+.row-votationlist .col-sm-6 .card.progressing {
+  border: 1px solid rgb(0, 0, 0) !important;
+}
+.row-votationlist .col-sm-6 .card.progressing:after {
+  content: "Decorrendo agora";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgb(0, 0, 0);
+  color: #fff;
+  border-radius: 40px;
+  font-size: 13px;
+  padding: 4px 10px;
+  font-weight: 600;
+}
+.row-votationlist .col-sm-6 .card.progressing .percent {
+  display: none !important;
+}
+.row-votationlist .col-sm-6 .card.progressing .person {
+  outline: none !important;
+}
+.row-votationlist .col-sm-6 .card.same {
+  border: 1px solid rgb(0, 60, 189) !important;
+}
+.row-votationlist .col-sm-6 .card.same:after {
+  content: "Empate";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgb(0, 60, 189);
+  color: #fff;
+  border-radius: 40px;
+  font-size: 13px;
+  padding: 4px 10px;
+  font-weight: 600;
+}
+.row-votationlist .col-sm-6 .card.havewinnwe {
+  border: 1px solid rgb(0, 189, 0) !important;
+}
+.row-votationlist .col-sm-6 .card.havewinnwe:after {
+  content: "Vencedor";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgb(0, 189, 0);
+  color: #fff;
+  border-radius: 40px;
+  font-size: 13px;
+  padding: 4px 10px;
+  font-weight: 600;
+}
+.row-votationlist .col-sm-6 .card .card-body {
+  display: block !important;
+}
+.row-votationlist .col-sm-6 .card .card-body .momr {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.row-votationlist .col-sm-6 .card .card-body .momr .copper {
+  position: relative;
+}
+.row-votationlist .col-sm-6 .card .card-body .momr .copper .person {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 100%;
+  border: 2px solid #fff;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin: auto;
+  overflow: hidden;
+}
+.row-votationlist .col-sm-6 .card .card-body .momr .copper .person img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.row-votationlist .col-sm-6 .card .card-body .momr .copper .person.winner {
+  outline: rgb(0, 184, 0) 2px solid;
+}
+.row-votationlist .col-sm-6 .card .card-body .momr .copper .percent {
+  width: -moz-max-content;
+  width: max-content;
+  height: 20px;
+  padding: 0 10px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  font-size: 12px;
+  font-family: var(--fml-secondary);
+  left: 0;
+  right: 0;
+  bottom: 30px;
+  margin: auto;
+  padding: 5px;
+  line-height: 100%;
+  background-color: #fff;
+  font-weight: 600;
+}
+.row-votationlist .col-sm-6 .card .card-body .momr .name {
+  margin-top: 10px;
+  padding: 4px 10px;
+  background-color: #fff;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 600;
+  width: -moz-max-content;
+  width: max-content;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  max-width: 120px;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
+.row-votationlist .col-sm-6 .card .card-body .middle-icon {
+  width: -moz-max-content;
+  width: max-content;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.9);
+  font-family: var(--fml-secondary);
 }/*# sourceMappingURL=admin-dash.css.map */
