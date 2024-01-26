@@ -130,6 +130,16 @@ class authRoutes {
             });
         }
     }
+
+    async logOut(req: Request, res: Response) {
+        req.session.destroy(function (err) {
+            if(err) {
+                console.log("Something bad happedned!");
+            }else{
+                return res.redirect("/");
+            }
+        })
+    }
 }
 
 export default authRoutes;

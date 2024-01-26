@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 
 class dashRoutes {
     async arquiveVotation(req: Request, res: Response) {
+        const session = req.session;
         const [series]: any = await connection.promise().query('SELECT * FROM series WHERE useable = ?', [1]);
 
         const [results]: any = await connection.promise().query(`
@@ -38,11 +39,14 @@ class dashRoutes {
             socketConnection: true,
             adminJsFiles: true,
             series,
-            battles: formattedResults
+            battles: formattedResults,
+            session: session
         });
     }
 
     async arquiveKeys(req: Request, res: Response) {
+        const session = req.session;
+
         try {
             const [series_availeable]: any = await connection.promise().query('SELECT * FROM series WHERE useable = ?', [1]);
 
@@ -65,7 +69,8 @@ class dashRoutes {
                                 socketConnection: true,
                                 adminJsFiles: true,
                                 ObjectOverKey: [],
-                                series: series_availeable
+                                series: series_availeable,
+                                session: session
                             });
                         }
 
@@ -104,7 +109,8 @@ class dashRoutes {
                     socketConnection: true,
                     adminJsFiles: true,
                     ObjectOverKey: result,
-                    series: series_availeable
+                    series: series_availeable,
+                    session: session
                 });
             }).catch((error) => {
                 console.error(error);
@@ -116,6 +122,7 @@ class dashRoutes {
 
     async arquiveKeysAll(req: Request, res: Response) {
         const keys_id = req.params.keys_id;
+        const session = req.session;
 
         try {
             const [series_useable]: any = await connection.promise().query('SELECT * FROM series WHERE useable = ?', [1]);
@@ -148,7 +155,8 @@ class dashRoutes {
                     socketConnection: true,
                     adminJsFiles: true,
                     credentialsList: response,
-                    series: series_useable
+                    series: series_useable,
+                    session: session
                 });
 
                 console.log(response);
@@ -159,6 +167,8 @@ class dashRoutes {
     }
 
     async arquiveWariesAll(req: Request, res: Response) {
+        const session = req.session;
+
         try {
             const [series]: any = await connection.promise().query('SELECT * FROM series WHERE useable = ?', [1]);
             const [waries]: any = await connection.promise().query(`SELECT * FROM wariers ORDER BY id DESC`);
@@ -171,7 +181,8 @@ class dashRoutes {
                 socketConnection: true,
                 adminJsFiles: true,
                 waries: waries,
-                series: series
+                series: series,
+                session: session
             });
         } catch (error) {
             res.json({
@@ -183,6 +194,8 @@ class dashRoutes {
     }
 
     async watch(req: Request, res: Response) {
+        const session = req.session;
+
         const [battleActive]: any = await connection.promise().query(`SELECT * FROM battles WHERE status = ?`, [1]);
 
         if (battleActive.length == 1) {
@@ -216,7 +229,8 @@ class dashRoutes {
                 socketConnection: true,
                 adminJsFiles: true,
                 battle,
-                votes
+                votes,
+                session: session
             });
         }
     }

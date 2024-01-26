@@ -1,13 +1,15 @@
 import { Router } from "express";
 import authRoutes from "../routesControllers/authRoutesController";
 import notLoggedIn from "../../middlewares/notLogedIn";
+import isLoggedIn from "../../middlewares/isLogedIn";
 
 const router = Router();
 
 router.get('/login', notLoggedIn, new authRoutes().loginScreen);
 router.post('/set-loged-in', notLoggedIn, new authRoutes().setLogedIn);
+router.get('/log-out', isLoggedIn, new authRoutes().logOut);
 
 //Posts Routes
-router.post('/voting', new authRoutes().setVoting)
+router.post('/voting', notLoggedIn, new authRoutes().setVoting)
 
 export default router;

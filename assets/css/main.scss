@@ -186,7 +186,7 @@ body {
 
             .modal-body {
 
-                .absolute-done{
+                .absolute-done {
                     position: absolute;
                     left: 0;
                     right: 0;
@@ -198,26 +198,26 @@ body {
                     justify-content: center;
                     align-items: center;
 
-                    &:after{
+                    &:after {
                         content: '';
                         width: 30px;
                         height: 30px;
                         border-radius: 100%;
-                        border: 3px solid rgb(0, 0, 0,.5);
+                        border: 3px solid rgb(0, 0, 0, .5);
                         border-right-color: transparent;
                         display: block;
 
                         animation: .6s roller infinite linear;
-                        
+
                         @keyframes roller {
-                            to{
+                            to {
                                 transform: rotate(360deg);
                             }
                         }
                     }
                 }
 
-                .spin-ld{
+                .spin-ld {
                     position: absolute;
                     width: 100%;
                     height: 100%;
@@ -228,12 +228,12 @@ body {
                     top: 0;
                     left: 0;
 
-                    &:after{
+                    &:after {
                         content: '';
                         width: 40px;
                         height: 40px;
                         border-right-color: transparent;
-                        border: 2px solid rgb(0, 0, 0,.8);
+                        border: 2px solid rgb(0, 0, 0, .8);
                         animation: .6s infinite roller linear;
                         border-radius: 100%;
                         border-right-color: transparent;
@@ -246,7 +246,7 @@ body {
                     }
                 }
 
-                .final-ld{
+                .final-ld {
                     width: 100%;
                     height: 100%;
                     display: flex;
@@ -276,7 +276,7 @@ body {
                         padding-right: 55px;
                     }
 
-                    .icon{
+                    .icon {
                         position: absolute;
                         top: 0;
                         right: 0;
@@ -286,17 +286,17 @@ body {
                         align-items: center;
                         justify-content: center;
 
-                        svg{
+                        svg {
                             width: 24px;
                             height: 24px;
 
-                            path{ 
-                                fill: rgb(0, 0, 0,.7);
+                            path {
+                                fill: rgb(0, 0, 0, .7);
                             }
                         }
                     }
 
-                    #palet_el{
+                    #palet_el {
                         width: 100%;
                         border: 1px solid rgb(75, 102, 255);
                         position: absolute;
@@ -307,108 +307,108 @@ body {
                         border-radius: 5px;
                         background-color: #fff;
 
-                        .warier{
+                        .warier {
                             display: flex;
                             gap: 10px;
                             padding: 0 15px;
                             align-items: center;
                             height: 55px;
                             cursor: pointer;
-                            
-                            &:hover{
-                                background-color: rgb(0, 0, 0,.05);
+
+                            &:hover {
+                                background-color: rgb(0, 0, 0, .05);
                             }
 
-                            &.no-warier{
+                            &.no-warier {
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
                                 font-size: 15px;
                                 font-weight: 600;
-                                color: rgb(0, 0, 0,.6);
+                                color: rgb(0, 0, 0, .6);
 
-                                svg{
+                                svg {
                                     width: 23px;
                                     height: 23px;
                                 }
                             }
 
-                            .photo{
+                            .photo {
                                 width: 40px;
                                 height: 40px;
                                 border-radius: 100%;
                                 overflow: hidden;
-                                background-image: linear-gradient(120deg, rgb(0,0,0,.09), rgb(0,0,0,.14), rgb(0,0,0,.08));
+                                background-image: linear-gradient(120deg, rgb(0, 0, 0, .09), rgb(0, 0, 0, .14), rgb(0, 0, 0, .08));
 
-                                img{
+                                img {
                                     width: 100%;
                                     height: 100%;
                                     object-fit: cover;
                                 }
                             }
 
-                            .name{
+                            .name {
                                 width: calc(100% - 40px);
                                 font-size: 15px;
                                 font-weight: 500;
-                                color: rgb(0, 0, 0,.8);
+                                color: rgb(0, 0, 0, .8);
                             }
                         }
                     }
                 }
 
-                .war-setup{
+                .war-setup {
                     display: flex;
                     gap: 10px;
                     margin-top: 20px;
 
-                    .gap-el{
+                    .gap-el {
                         height: 120px;
                         display: flex;
                         align-items: center;
-                        color: rgb(0, 0, 0,.8);
+                        color: rgb(0, 0, 0, .8);
                         font-size: 14px;
                         font-family: var(--fml-secondary);
                         justify-content: center;
                     }
 
-                    .w-element{
+                    .w-element {
                         width: calc(100% / 2);
                         padding: 20px 10px;
                         border-radius: 5px;
-                        background-color: rgb(0, 0, 0,.06);
-                        border: 1px solid rgb(0, 0, 0,.1);
+                        background-color: rgb(0, 0, 0, .06);
+                        border: 1px solid rgb(0, 0, 0, .1);
 
-                        .profile-pic{
+                        .profile-pic {
                             width: 60px;
                             height: 60px;
-                            background-color: rgb(0, 0, 0,.1);
+                            background-color: rgb(0, 0, 0, .1);
                             border-radius: 100%;
-                            border: 1px solid rgb(0, 0, 0,.1);
+                            border: 1px solid rgb(0, 0, 0, .1);
                             left: 0;
                             right: 0;
                             margin: auto;
                             overflow: hidden;
 
-                            img{
+                            img {
                                 width: 100%;
                                 height: 100%;
                                 object-fit: cover;
                             }
                         }
 
-                        .profile-name{
+                        .profile-name {
                             font-size: 15px;
                             font-weight: 600;
-                            color: rgb(0, 0, 0,.85);
+                            color: rgb(0, 0, 0, .85);
                             width: 100%;
                             text-align: center;
                             margin-top: 10px;
 
-                            span{
+                            span {
                                 width: 100%;
                                 height: 15px;
-                                background-color: rgb(0, 0, 0,.1);
+                                background-color: rgb(0, 0, 0, .1);
                                 border-radius: 10px;
                                 display: block;
                             }
@@ -416,7 +416,7 @@ body {
                     }
                 }
 
-                .submit_battle{
+                .submit_battle {
                     width: 100%;
                     height: 45px;
                     border: none;
@@ -429,17 +429,39 @@ body {
                     margin-top: 20px;
                 }
 
-                .keySeries-select{
-                    select{
+                .keySeries-select {
+                    select {
                         border-radius: 0;
-                        border: 1px solid rgb(00, 0, 0,.1);
+                        border: 1px solid rgb(00, 0, 0, .1);
                         font-size: 15px;
                         font-weight: 500;
-                        color: rgb(0, 0, 0,.88);
+                        color: rgb(0, 0, 0, .88);
                         cursor: pointer;
                     }
                 }
             }
+        }
+    }
+}
+
+.btn-group {
+    button {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        box-shadow: none !important;
+        font-size: 14px;
+        font-weight: 600;
+        color: #000;
+
+        &:hover, &:focus, &:active {
+            background-color: transparent;
+            border: none;
+            outline: none;
+            box-shadow: none !important;
+            font-size: 14px;
+            font-weight: 600;
+            color: #000;
         }
     }
 }
