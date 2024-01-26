@@ -4,6 +4,12 @@
         <div class="page-content">
             <h1 class="mt-4 mb-4">Batalhas anteriores</h1>
 
+            <% if(battles.length == 0) { %>
+                <div class="alert alert-primary">
+                    Nehuma batalha ou nenhum usuario relacionado.
+                </div>
+            <% } %>
+
             <div class="row row-votationlist">    
                 <% battles.forEach((element) => { %>
                     <div class="col-sm-6">
