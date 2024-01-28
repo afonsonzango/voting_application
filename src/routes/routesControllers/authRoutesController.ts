@@ -5,6 +5,7 @@ import connection from "../../dataCenter";
 interface SessionData {
     auth?: boolean;
     username?: string;
+    _id?: string;
 }
 
 class authRoutes {
@@ -28,7 +29,8 @@ class authRoutes {
                 bootstrap: true,
                 js: 'public/',
                 socketConnection: false,
-                adminJsFiles: false
+                adminJsFiles: false,
+                info: req.flash("info")
             });
         } catch (error) {
             res.status(500).send({
@@ -99,37 +101,44 @@ class authRoutes {
 
     async setLogedIn(req: Request & { session: SessionData }, res: Response) {
         const { username, password } = req.body;
-
-        if (!username || !password) {
-            console.log("Any field can be empty.");
+        const referer: any = req.get("Referer");
+    
+        if (username == '' || password == '') {
+            req.flash("info", "Erro ao realizar login.");
+            return res.redirect(referer);
         }
-
+    
         const [getUsername]: any = await connection.promise().query(`SELECT * FROM users WHERE username = ?`, [username]);
-        console.log(getUsername[0].password);
         if (getUsername.length == 0) {
-            console.log("Invalid Credentials");
-        } else {
-            bcryptjs.compare(password, getUsername[0].password, (error, match) => {
-                if (error) {
-                    console.log("Something wrong happened while prossessing informations.");
-                } else {
-                    console.log(match);
-                    if (match) {
-                        var hour = 3600000 * 24;
-                        req.session.cookie.expires = new Date(Date.now() + hour);
-                        req.session.cookie.maxAge = hour;
-
-                        req.session.auth = true;
-                        req.session.username = getUsername[0].username;
-
-                        res.redirect('/');
-                    } else {
-                        console.log("Invalid Credentials");
-                    }
-                }
-            });
+            req.flash("info", "Erro ao realizar login.");
+            return res.redirect(referer);
         }
+    
+        bcryptjs.compare(password, getUsername[0].password, (error, match) => {
+            if (error) {
+                req.flash("info", "Erro ao realizar login.");
+                return res.redirect(referer);
+            }
+    
+            console.log(match);
+    
+            if (match) {
+                var hour = 3600000 * 24;
+                req.session.cookie.expires = new Date(Date.now() + hour);
+                req.session.cookie.maxAge = hour;
+    
+                req.session.auth = true;
+                req.session.username = getUsername[0].username;
+                req.session._id = getUsername[0].id;
+    
+                return res.redirect('/');
+            } else {
+                req.flash("info", "Erro ao realizar login.");
+                return res.redirect(referer);
+            }
+        });
     }
+    
 
     async logOut(req: Request, res: Response) {
         req.session.destroy(function (err) {
@@ -153,11 +162,12 @@ class authRoutes {
             socketConnection: true,
             adminJsFiles: true,
             session: session,
-            series: series
+            series: series,
+            info: req.flash('info')
         });
     }
 
-    async ChangePassword (req: Request, res: Response) {
+    async ChangePassword(req: Request, res: Response) {
         const session = req.session;
         const [series]: any = await connection.promise().query('SELECT * FROM series WHERE useable = ?', [1]);
 
@@ -169,7 +179,8 @@ class authRoutes {
             socketConnection: true,
             adminJsFiles: true,
             session: session,
-            series: series
+            series: series,
+            info: req.flash('info')
         });
     }
 }

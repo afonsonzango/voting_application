@@ -10,6 +10,11 @@
         </div>
 
         <form action="/auth/set-loged-in" method="POST" class="id-verify-form">
+            <% if(info != ''){ %>
+                <div class="alert alert-danger">
+                    <%- info %>
+                </div>
+            <% } %>
             <div class="fk-input-copper mb-2">
                 <input type="text" name="username" placeholder="Usuário" />
             </div>

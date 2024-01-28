@@ -4,6 +4,7 @@ import routesSetter from "./routes/routesAccess";
 import expressEjsLayouts from "express-ejs-layouts";
 import cookie_parser from "cookie-parser";
 import express_session from "express-session";
+import flash from "connect-flash";
 import http from "http";
 
 const app = express();
@@ -27,6 +28,7 @@ app.set('view engine', 'ejs');
 app.use(expressEjsLayouts);
 app.set('layout', './layout/layout');
 
+app.use(flash());
 app.use(cookie_parser('NotSoSecret'));
 app.use(express_session({
     secret: 'something',

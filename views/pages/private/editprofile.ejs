@@ -4,10 +4,21 @@
     <div class="moddle">
         <div class="items">
             <h1 class="mb-2">Alterar usuario</h1>
-            <form action="">
-                <input placeholder="Novo nome de usuario" type="text">
+
+            <% if(info != '') { %>
+                <% if(info != 'success') { %>
+                    <div class="alert alert-danger"><%- info %></div>
+                <% } %>
+            <% } %>
+
+            <% if(info == 'success') { %>
+                <div class="alert alert-success">Seu nome de usuario foi mudado, da proxima vez que fizer login, utilizara ele.</div>
+            <% } %>
+
+            <form action="/actions/change-username" method="POST">
+                <input placeholder="Novo nome de usuario" type="text" name="fUsername">
                 <br>
-                <input placeholder="Digite sua senha" type="password">
+                <input placeholder="Digite sua senha" type="password" name="password">
                 <br>
                 <input value="Enviar" type="submit" />
             </form>
