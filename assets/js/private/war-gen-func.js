@@ -83,6 +83,7 @@ function setWarierField(data) {
 //---------------- Enviar dados à DB -----------------//
 
 //Edvitar refresh
+
 document.getElementById('formSubmitElement').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -95,35 +96,35 @@ document.getElementById('formSubmitElement').addEventListener('submit', function
     // Flag para verificar se há algum valor duplicado
     var hasDuplicates = false;
 
+    // Flag para verificar se pelo menos um select foi selecionado
+    var atLeastOneSelected = false;
+
     // Percorrer os selects
     selects.forEach((select, index) => {
         // Obter o valor do select atual
         var value = select.value;
 
-        // Verificar se o valor já está presente no array, permitindo valores vazios
+        // Verificar se pelo menos um select foi selecionado
+        if (value !== "") {
+            atLeastOneSelected = true;
+        }
+
+        // Verificar se o valor já está presente no array e não é vazio
         if (values.includes(value) && value !== "") {
             hasDuplicates = true;
-            // Adicionar uma lógica para lidar com a duplicata, se necessário
-            // Por exemplo, exibir uma mensagem de erro ou impedir o envio do formulário
             console.log('Duplicata encontrada: ' + value);
         } else {
             // Adicionar o valor ao array
             values.push(value);
         }
-
-        // Se for o primeiro select e estiver vazio
-        if (index === 0 && value === "") {
-            hasDuplicates = true;
-            // Adicionar uma lógica para lidar com o primeiro select vazio, se necessário
-            // Por exemplo, exibir uma mensagem de erro ou impedir o envio do formulário
-            console.log('O primeiro select não pode ser vazio.');
-        }
     });
 
-    // Se não houver duplicatas, você pode prosseguir com o envio do formulário
-    if (!hasDuplicates) {
+    // Se pelo menos um select não estiver vazio e não houver duplicatas, você pode prosseguir com o envio do formulário
+    if (atLeastOneSelected && !hasDuplicates) {
+
         // Lógica para enviar o formulário ou realizar outras ações
         console.log('Formulário enviado com sucesso!');
+
         const warObject = {
             warier1: e.target[1].value,
             warier2: e.target[2].value,
@@ -132,17 +133,22 @@ document.getElementById('formSubmitElement').addEventListener('submit', function
             keySeries3: e.target[5].value,
             keySeries4: e.target[6].value,
         }
-    
+
         document.getElementById('absolute-loader').innerHTML = `
             <div class="spin-ld"></div>
         `
+
         socket.emit('setUpNewBattle', warObject);
-        // document.querySelector("#formSubmitElement").submit(); // Se desejar enviar o formulário automaticamente
     } else {
-        // Exibir um alerta informando que o formulário não está bom
-        alert('O formulário não está válido. Verifique os selects.');
+        // Exibir um alerta informando que o formulário não está válido
+        if (!atLeastOneSelected) {
+            alert('Pelo menos um select deve ser selecionado.');
+        } else {
+            alert('O formulário não está válido. Verifique os selects.');
+        }
     }
 });
+
 
 socket.on('removeLoader', function () {
 
@@ -176,5 +182,7 @@ socket.on('battleStatusResponse', function (battle) {
                 </a>
             </div>
         `
+
+        document.querySelector('#newbattletoggle').innerHTML = ``
     }
 });
