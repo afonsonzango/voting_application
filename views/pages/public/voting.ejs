@@ -11,7 +11,7 @@
 
         <form action="/auth/voting" method="POST" class="id-verify-form">
             <div class="fk-input-copper mb-3">
-                <input type="text" name="id_purse" placeholder="Escreva o ID para votar" autocomplete="off"/>
+                <input type="text" name="id_purse" placeholder="Escreva o ID para votar" autocomplete="off"  oninput="restringirInput(event)"/>
             </div>
             <div class="fk-button-copper">
                 <input type="submit" value="Registar Voto" />
@@ -19,3 +19,16 @@
         </form>
     </div>
 </section>
+
+<script>
+    function restringirInput(event) {
+        // Obtém o valor atual do input
+        var valorAtual = event.target.value;
+
+        // Remove caracteres que não são números, "-", ou letras maiúsculas
+        var novoValor = valorAtual.replace(/[^A-Z0-9-]/g, '');
+
+        // Atualiza o valor do input com o novo valor restrito
+        event.target.value = novoValor;
+    }
+</script>

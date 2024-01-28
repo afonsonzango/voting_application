@@ -133,12 +133,44 @@ class authRoutes {
 
     async logOut(req: Request, res: Response) {
         req.session.destroy(function (err) {
-            if(err) {
+            if (err) {
                 console.log("Something bad happedned!");
-            }else{
+            } else {
                 return res.redirect("/");
             }
         })
+    }
+
+    async UserSettings(req: Request, res: Response) {
+        const session = req.session;
+        const [series]: any = await connection.promise().query('SELECT * FROM series WHERE useable = ?', [1]);
+
+        res.status(200).render('pages/private/editprofile', {
+            title: 'Editar perfil',
+            css: '/private/editprofile.css',
+            js: '',
+            bootstrap: true,
+            socketConnection: true,
+            adminJsFiles: true,
+            session: session,
+            series: series
+        });
+    }
+
+    async ChangePassword (req: Request, res: Response) {
+        const session = req.session;
+        const [series]: any = await connection.promise().query('SELECT * FROM series WHERE useable = ?', [1]);
+
+        res.status(200).render('pages/private/changepassword', {
+            title: 'Editar perfil',
+            css: '/private/editprofile.css',
+            js: '',
+            bootstrap: true,
+            socketConnection: true,
+            adminJsFiles: true,
+            session: session,
+            series: series
+        });
     }
 }
 

@@ -117,12 +117,11 @@
             </li>
             <li class="logout-btn">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
-                        aria-expanded="false" style="text-transform: capitalize;">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" style="color: #000" data-bs-toggle="dropdown" aria-expanded="false" style="text-transform: capitalize;">
                         <%- session.username %>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" type="button">Definicoes</a></li>
+                        <li><a href="/auth/user-settings/change-username" class="dropdown-item" type="button">Definicoes</a></li>
                         <li><a href="/auth/log-out" class="dropdown-item" type="button">Sair</a></li>
                     </ul>
                 </div>
@@ -132,5 +131,5 @@
 </nav>
 
 <%- include('./key-gen-modal') %>
-    <%- include('./warier-gen-modal') %>
-        <%- include('./new-battle-modal') %>
+<%- include('./warier-gen-modal') %>
+<%- include('./new-battle-modal') %>
