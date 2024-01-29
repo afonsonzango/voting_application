@@ -64,15 +64,22 @@ section.main-section-select {
 
         .mea-element {
             position: relative;
-            display: flex;
-            gap: 10px;
 
-            .upper{
+            div {
+                display: block;
+                position: relative;
                 width: 100px;
-                background-color: #004d80;
-                margin-bottom: 15px;
-                border-radius: 4px;
-                border-bottom: 2px solid #000;
+
+                .upper{
+                    width: 100px;
+                    background-color: #004d80;
+                    margin-bottom: 15px;
+                    border-radius: 4px;
+                    border-bottom: 2px solid #000;
+                    position: absolute;
+                    bottom: 0;
+                    transition: 1s !important;
+                }
             }
 
             .userinf {
