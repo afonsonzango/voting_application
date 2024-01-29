@@ -213,10 +213,17 @@ body {
   align-items: center;
 }
 .main-navbar .fk-logo ._fk-logo {
-  width: 35px;
-  height: 35px;
+  width: 45px;
+  height: 45px;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 100%;
+  overflow: hidden;
+}
+.main-navbar .fk-logo ._fk-logo img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .main-navbar .fk-lik-list {
   width: 100%;
