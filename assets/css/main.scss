@@ -453,6 +453,24 @@ body {
         font-size: 14px;
         font-weight: 600;
         color: #000;
+        display: flex;
+        align-items: center;
+        padding: 0;
+
+        .profile_illustration {
+            width: 34px;
+            height: 34px;
+            background-color: rgb(0, 0, 0, .08);
+            border-radius: 100%;
+            margin-right: 5px;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
 
         &:hover, &:focus, &:active {
             background-color: transparent;
